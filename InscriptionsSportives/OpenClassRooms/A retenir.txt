@@ -1,0 +1,5 @@
+* il y a des tests boite noire (black-box) et des tests boite blanche (white-box). Les tests 2 types de test : 
+- Boite noire se font sans que le testeur ne connaisse le contenu de la méthode qu'il va tester.
+- Boite blanche donne accès au contenu de la méthode à tester.
+
+* Il est preferable d'avoir une classe test par classe dans le programme et de les separer en ayant une copie du package principal(main)  qui sera dedié uniquement aux tests.
