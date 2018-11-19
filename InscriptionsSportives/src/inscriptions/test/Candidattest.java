@@ -12,36 +12,36 @@ import inscriptions.Personne;
 
 class Candidattest 
 {	
-	private Inscriptions inscriptions = Inscriptions.getInscriptions();
-	Competition flechettes = null;
-	String nom = null;
-
+	Inscriptions inscriptions = Inscriptions.getInscriptions();
+	Competition flechettes = inscriptions.createCompetition("Mondial de fléchettes", null, false);
+	Personne tony = inscriptions.createPersonne("Tony", "Dent de plomb", "azerty"), 
+			boris = inscriptions.createPersonne("Boris", "le Hachoir", "ytreza");
+	
 	@BeforeEach
 	void setUp() throws Exception 
 	{
-		nom = "Bernard";
-		flechettes = inscriptions.createCompetition("flechette", null, true);
 		
 	}
 
 	@Test
 	void testCandidat() {
-		fail("Not yet implemented");
+		
 	}
 
 	@Test
 	void testGetNom() {
-		assertTrue(this.nom.equals("Bernard") );
+		assertTrue(tony.getNom().equals("Tony") );
 	}
 
 	@Test
 	void testSetNom() {
-		fail("Not yet implemented");
+		tony.setNom("Tonio");
+		assertTrue(tony.getNom().equals("Tonio") );
 	}
 
 	@Test
 	void testGetCompetitions() {
-		fail("Not yet implemented");
+		;
 	}
 
 	@Test
