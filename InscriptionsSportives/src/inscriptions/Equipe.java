@@ -67,7 +67,7 @@ public class Equipe extends Candidat
 				AAjouter.add(personne);
 		}
 		return AAjouter;
-	}
+	}//Fini
 	
 	@Override
 	public void delete()
