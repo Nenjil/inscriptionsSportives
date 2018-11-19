@@ -60,9 +60,13 @@ public class Equipe extends Candidat
 	 */
 	
 	public Set<Personne> getPersonnesAAjouter()
-	{
-		// TODO retourner les personnes que l'on peut ajouter dans cette équipe.
-		return null;
+	{	
+		SortedSet<Personne> AAjouter = new TreeSet<>();
+		for (Personne personne : Inscriptions.getInscriptions().getPersonnes()) {
+			if (!getMembres().contains(personne))
+				AAjouter.add(personne);
+		}
+		return AAjouter;
 	}
 	
 	@Override
