@@ -164,7 +164,16 @@ public class Competition implements Comparable<Competition>, Serializable
 	
 	public Set<Personne> getPersonnesAInscrire()
 	{
+		Set<Personne> aInscrire = new TreeSet<>();
+		for(Personne personne : inscriptions.getPersonnes())
+		{
+			if(getCandidats().contains(personne))
+			{
+				aInscrire.add(personne);
+			}
+		}
 		// TODO retourner les personnes que l'on peut inscrire à cette compétition.
+		
 		return null;
 	}
 
