@@ -123,7 +123,7 @@ public class Competition implements Comparable<Competition>, Serializable
 	
 	public boolean add(Personne personne)
 	{
-		// TODO vérifier que la date de clôture n'est pas passée 
+		// TODO vérifier que la date de clôture n'est pas passée
 		if (enEquipe)
 			throw new RuntimeException();
 		personne.add(this);
