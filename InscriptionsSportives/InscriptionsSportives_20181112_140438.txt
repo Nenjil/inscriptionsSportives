@@ -1,0 +1,11 @@
+ERROR - 14:04:38: java.net.MalformedURLException: unknown protocol: pathmap
+WARNING - 14:04:54: Convert InscriptionsSportives
+ERROR - 14:04:54: java.net.MalformedURLException: unknown protocol: pathmap
+WARNING - 14:05:07: Convert InscriptionsSportives
+ERROR - 14:05:07: java.net.MalformedURLException: unknown protocol: pathmap
+WARNING - 14:05:27: Convert InscriptionsSportives
+ERROR - 14:05:27: java.net.MalformedURLException: unknown protocol: pathmap
+WARNING - 14:05:36: Convert InscriptionsSportives
+ERROR - 14:05:36: java.net.MalformedURLException: unknown protocol: pathmap
+WARNING - 14:07:23: Convert InscriptionsSportives
+ERROR - 14:07:23: java.net.MalformedURLException: unknown protocol: pathmap
