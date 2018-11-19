@@ -127,7 +127,13 @@ public class Competition implements Comparable<Competition>, Serializable
 		if (enEquipe)
 			throw new RuntimeException();
 		personne.add(this);
+		LocalDate d = LocalDate.now();
+		if(d.compareTo(getDateCloture()) < 0)
+			throw new RuntimeException();
 		return candidats.add(personne);
+
+		
+		
 	}
 
 	/**
@@ -144,7 +150,11 @@ public class Competition implements Comparable<Competition>, Serializable
 		if (!enEquipe)
 			throw new RuntimeException();
 		equipe.add(this);
+		LocalDate d = LocalDate.now();
+		if(d.compareTo(getDateCloture()) < 0)
+			throw new RuntimeException();
 		return candidats.add(equipe);
+		
 	}
 	
 	/**
