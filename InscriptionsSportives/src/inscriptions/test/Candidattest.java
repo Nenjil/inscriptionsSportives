@@ -16,16 +16,18 @@ import inscriptions.Personne;
 
 class Candidattest 
 {	
-	Inscriptions inscriptions = Inscriptions.getInscriptions();
-	Competition flechettes = inscriptions.createCompetition("Mondial de fléchettes", null, false);
-	Personne tony = inscriptions.createPersonne("Tony", "Dent de plomb", "azerty"), 
-			boris = inscriptions.createPersonne("Boris", "le Hachoir", "ytreza");
-		//Set<Competition> competitions = Candidat.getCompetitions();
+Personne boris , tony = null ;
+Competition flechettes = null ;
+
 
 	@BeforeEach
 	void setUp() throws Exception 
 	{
-
+		Inscriptions inscriptions = Inscriptions.getInscriptions();
+		Competition flechettes = inscriptions.createCompetition("Mondial de fléchettes", null, false);
+		Personne tony = inscriptions.createPersonne("Tony", "Dent de plomb", "azerty"), 
+		boris = inscriptions.createPersonne("Boris", "le Hachoir", "ytreza");
+		flechettes.add(tony); 
 	}
 
 	@Test
@@ -46,8 +48,8 @@ class Candidattest
 
 	@Test
 	void testGetCompetitions() {
-		//assertTrue(Collections.unmodifiableSet(competitions).contains(competitions));
-		
+		tony.getCompetitions();
+		assertTrue(tony.getCompetitions().contains(flechettes));
 	}
 
 	@Test

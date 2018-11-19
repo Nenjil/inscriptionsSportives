@@ -1,5 +1,7 @@
 package inscriptions;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -8,6 +10,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Collections;
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
@@ -242,9 +245,9 @@ public class Inscriptions implements Serializable
 	public static void main(String[] args)
 	{
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
-		Competition flechettes = inscriptions.createCompetition("Mondial de fléchettes", null, false);
+		Competition flechettes = inscriptions.createCompetition("Mondial de fléchettes", LocalDate.of(2019, Month.JANUARY, 1), false);
 		Personne tony = inscriptions.createPersonne("Tony", "Dent de plomb", "azerty"), 
-				boris = inscriptions.createPersonne("Boris", "le Hachoir", "ytreza");
+		boris = inscriptions.createPersonne("Boris", "le Hachoir", "ytreza");
 		flechettes.add(tony);
 		Equipe lesManouches = inscriptions.createEquipe("Les Manouches");
 		lesManouches.add(boris);
@@ -252,6 +255,8 @@ public class Inscriptions implements Serializable
 		System.out.println(inscriptions);
 		lesManouches.delete();
 		System.out.println(inscriptions);
+		
+		
 		try
 		{
 			inscriptions.sauvegarder();
@@ -260,5 +265,12 @@ public class Inscriptions implements Serializable
 		{
 			System.out.println("Sauvegarde impossible." + e);
 		}
+		
+	/*Personne jojo = inscriptions.createPersonne("Jojo", "ejfi", "dcdc");
+		flechettes.add(jojo);
+		assertTrue(inscriptions.getCandidats().contains(jojo));
+		flechettes.remove(jojo);
+		jojo.delete();
+		System.out.println(inscriptions);*/
 	}
 }

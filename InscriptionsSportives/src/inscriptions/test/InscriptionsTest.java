@@ -2,7 +2,9 @@ package inscriptions.test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.Month;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,7 +18,7 @@ class InscriptionsTest {
 	// on cree avant tout une nouvelle inscription avec nos variables 
 	private Inscriptions inscriptions = Inscriptions.getInscriptions();
 	Personne tony,boris = null;
-	Competition flechettes = null;
+	Competition flechettes,basket = null;
 	Equipe lesManouches = null;
 	 
 	
@@ -25,7 +27,7 @@ class InscriptionsTest {
 		//set up avant chaque test 
 		tony = inscriptions.createPersonne("Tony", "Dent de plomb","azerty");
 		boris = inscriptions.createPersonne("Boris", "le Hachoir", "ytreza");
-		flechettes = inscriptions.createCompetition("flechette", null, true);
+		flechettes = inscriptions.createCompetition("flechette", LocalDate.of(2019, Month.JANUARY, 1), false);
 		lesManouches = inscriptions.createEquipe("Les Manouches");
 		
 	}
@@ -84,7 +86,6 @@ class InscriptionsTest {
 	
 	
 	@Test
-	
 	void testDeleteCompetition()  {
 		assertTrue(inscriptions.getCompetitions().contains(flechettes));
 		flechettes.delete();
@@ -102,11 +103,18 @@ class InscriptionsTest {
 	}
 
 	
-	/*
+	
 	@Test
 	void testReinitialiser() {
-		fail("Not yet implemented");
-	}*/
+		// Avant reinitialisation il y des candidats
+		assertFalse(inscriptions.getCandidats().isEmpty());
+		// on va la vider et l'afficher pour verifier
+		inscriptions=inscriptions.reinitialiser() ; 
+		inscriptions=Inscriptions.getInscriptions(); 
+		// logiquement une fois vidée elle ne contient plus aucun candidat verifions 
+		assertTrue(inscriptions.getCandidats().isEmpty());
+	}
+	
 	
 	
 	
@@ -124,30 +132,55 @@ class InscriptionsTest {
 		assertTrue(inscriptions.getCandidats().isEmpty());
 	}
 
-	/*
-	@Test
-	void testReinitialiser() {
-		fail("Not yet implemented");
-	}
+	
+	
 
 	@Test
 	void testRecharger() {
-		fail("Not yet implemented");
+		
+		// suppresion de jojo intrusif ( au cas ou ) 
+		/*Personne jojo = inscriptions.createPersonne("Jojo", "ejfi", "dcdc");
+		flechettes.add(jojo);
+		assertTrue(inscriptions.getCandidats().contains(jojo));
+		flechettes.remove(jojo);
+		jojo.delete();
+		 try {
+				inscriptions.sauvegarder();
+			} catch (IOException e) {
+			}
+		System.out.println(inscriptions);*/
+		// Creation d'une "Personne" jojo
+		Personne jojo = inscriptions.createPersonne("Jojo", "ejfi", "dcdc");
+		//ajout dans la compétition jojo
+		flechettes.add(jojo);
+		assertTrue(inscriptions.getCandidats().contains(jojo));
+		//test de la methode inscription 
+		inscriptions = inscriptions.recharger();
+		assertFalse(inscriptions.getCandidats().contains(jojo));
 	}
 
 	@Test
 	void testSauvegarder() {
-		fail("Not yet implemented");
+		
+		Personne jojo = inscriptions.createPersonne("Jojo", "ejfi", "dcdc");
+		flechettes.add(jojo);
+		//test de la methode "Sauvegarde"
+		assertTrue(inscriptions.getCandidats().contains(jojo));
+		 try {
+			inscriptions.sauvegarder();
+		} catch (IOException e) {
+		}
+		assertTrue(inscriptions.getCandidats().contains(jojo));
+		//Suppression de la personnne jojo pour cohésion des autres tests
+		flechettes.remove(jojo);
+		jojo.delete();
+		//enregistrement de la suppression
+		 try {
+				inscriptions.sauvegarder();
+			} catch (IOException e) {
+			}
+		 // Chargement de l'inscription par defaut
+		 inscriptions= inscriptions.recharger();
 	}
 
-	@Test
-	void testToString() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testMain() {
-		fail("Not yet implemented");
-	}
-*/
 }
