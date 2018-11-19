@@ -2,9 +2,13 @@ package inscriptions.test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.Collections;
+import java.util.Set;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import inscriptions.Candidat;
 import inscriptions.Competition;
 import inscriptions.Equipe;
 import inscriptions.Inscriptions;
@@ -16,11 +20,12 @@ class Candidattest
 	Competition flechettes = inscriptions.createCompetition("Mondial de fléchettes", null, false);
 	Personne tony = inscriptions.createPersonne("Tony", "Dent de plomb", "azerty"), 
 			boris = inscriptions.createPersonne("Boris", "le Hachoir", "ytreza");
-	
+		Set<Competition> competitions = Candidat.getCompetitions();
+
 	@BeforeEach
 	void setUp() throws Exception 
 	{
-		
+
 	}
 
 	@Test
@@ -41,7 +46,8 @@ class Candidattest
 
 	@Test
 	void testGetCompetitions() {
-		;
+		assertTrue(Collections.unmodifiableSet(competitions).contains(competitions));
+		
 	}
 
 	@Test
