@@ -34,9 +34,7 @@ class InscriptionsTest {
 
 	@Test
 	void testGetCompetitions() {
-		assertTrue(inscriptions.getCompetitions().contains(flechettes));
-			
-		
+		assertTrue(inscriptions.getCompetitions().contains(flechettes));					
 	}
 
 	@Test

@@ -1,80 +1,79 @@
-package inscriptions.test;
+package inscriptions.test ;
 
-import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.Collections;
-import java.util.Set;
+import java.time.LocalDate;
 
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 
-import inscriptions.Candidat;
+
+
 import inscriptions.Competition;
-import inscriptions.Equipe;
 import inscriptions.Inscriptions;
 import inscriptions.Personne;
+import junit.framework.TestCase;
 
-class Candidattest 
-{	
-Personne boris , tony = null ;
-Competition flechettes = null ;
+public class Candidattest  extends TestCase{
+
+	private String nomRobert = "Robert";
+	private String nomTony = "Tony";
+	private Inscriptions inscriptions;
+	private Personne tony ;
+	private Competition testCompet ;
+	private Competition testCompet2 ;
 
 
-	@BeforeEach
-	void setUp() throws Exception 
+	@Override
+	protected void setUp() throws Exception
 	{
-		Inscriptions inscriptions = Inscriptions.getInscriptions();
-		Competition flechettes = inscriptions.createCompetition("Mondial de fléchettes", null, false);
-		Personne tony = inscriptions.createPersonne("Tony", "Dent de plomb", "azerty"), 
-		boris = inscriptions.createPersonne("Boris", "le Hachoir", "ytreza");
-		flechettes.add(tony); 
+		super.setUp();
+		inscriptions = Inscriptions.getInscriptions();
+		tony = inscriptions.createPersonne(nomTony, "lala", "azerty");
+		testCompet = inscriptions.createCompetition("test", LocalDate.parse
+				("2018-02-10"), false);
+		testCompet2 = inscriptions.createCompetition("test", LocalDate.parse
+				("2018-02-10"), false);
 	}
-
+	
+	
 	@Test
-	void testCandidat() {
+	public void testCandidat() throws Exception {
+		
+		Personne jean = inscriptions.createPersonne("pougetoux", "jean", "spyroo913@hotmail.com");
+		assertEquals("pougetoux", jean.getNom());
 		
 	}
-
+	
 	@Test
-	void testGetNom() {
-		assertTrue(tony.getNom().equals("Tony") );
+	public void testGetNom() throws Exception {
+		assertEquals(nomTony, tony.getNom());
 	}
 
 	@Test
-	void testSetNom() {
-		tony.setNom("Tonio");
-		assertTrue(tony.getNom().equals("Tonio") );
+	public void testSetNom() {
+		tony.setNom(nomRobert);
+		assertEquals(nomRobert, tony.getNom());
 	}
 
 	@Test
-	void testGetCompetitions() {
-		tony.getCompetitions();
-		assertTrue(tony.getCompetitions().contains(flechettes));
+	public void testGetCompetitions() {
+		assertTrue(inscriptions.getCompetitions().contains(testCompet) && inscriptions.getCompetitions().contains(testCompet2) );	}
+
+	@Test
+	public void testDelete() {
+	Competition test3 = inscriptions.createCompetition("test3", null, true); 
+	assertTrue(inscriptions.getCompetitions().contains(test3));
+	test3.delete();
+	assertFalse(inscriptions.getCompetitions().contains(test3));
 	}
 
 	@Test
-	void testAdd() {
-		fail("Not yet implemented");
+	public void testCompareTo() {
+		Personne a = inscriptions.createPersonne("abcd", "test", "a");
+		Personne b = inscriptions.createPersonne("efgh", "test", "b");
+		assertTrue( a.compareTo(b) < 0 );		
+		Personne c =  inscriptions.createPersonne("abcd", "test", "a");
+		assertTrue(b.compareTo(c)> 0);
+		assertTrue( a.compareTo(c) == 0 );
 	}
-
-	@Test
-	void testRemove() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testDelete() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testCompareTo() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	void testToString() {
-		fail("Not yet implemented");
-	}
-
+	
 }
