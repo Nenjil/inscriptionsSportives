@@ -10,6 +10,7 @@ public class MainMenuConsole{
 	{
 		 Creates the root menu of the application
 		Menu rootMenu = new Menu("Root Menu");
+		 
 	
 		// Creates options
 		//Gestion + Selection competition dans classe plus tard
