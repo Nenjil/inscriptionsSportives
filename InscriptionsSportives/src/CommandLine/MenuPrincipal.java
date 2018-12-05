@@ -59,6 +59,7 @@ public class MenuPrincipal {
 	static Menu getCompetMenu()
 	{
 		Menu Competition = MenuCompet.createMenuCompet("Menu competition","Competition","C");
+		
 		return Competition;
 
 	}
