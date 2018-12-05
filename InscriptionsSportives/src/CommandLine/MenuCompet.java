@@ -34,7 +34,8 @@ public class MenuCompet {
 				else {
 					for (Competition compet : inscriptions.getCompetitions()) {	
 						System.out.println("Nom : "+ compet.getNom()+ " \nEn equipe : "+ compet.estEnEquipe()+ "\nCandidats : "+ compet.getCandidats());
-						System.out.println("--------------------------------------------------------------------");			
+						System.out.println("--------------------------------------------------------------------");	
+						
 					}
 		       }
 			}
