@@ -22,41 +22,41 @@ public class ActionModifCompetition implements Action {
 	
 	@Override
 	public void optionSelected() {
-		LocalDate datecloture =null ;
-		String nom = "",choixenEquipe = "";
-		Boolean enEquipe = false;
+	
 		
+		String choix,nom =  null;
+		LocalDate dateCloture=null;
+	
+		do {
+			choix = InOut.getString("\nVoulez-vous changer le nom de la compétition ?\n" +
+					"Le nom actuel est " + competition.getNom() + ".\n" +
+					"Taper 0 pour le changer 1 pour continuer ");
+			if(choix.equals("0")) {
+			nom = InOut.getString("Taper le nouveau nom de competition : ");
+			competition.setNom(nom);}
+			else if(choix.equals("1")) {
+				choix = InOut.getString("\nVoulez-vous changer la date de cloture de la compétition ?\n" +
+						"La date actuelle est " + competition.getDateCloture() + ".\n" +
+						"Taper 0 pour le changer 1 pour continuer ");
+			if(choix.equals("0")) {
+					dateCloture = LocalDate.parse(InOut.getString("Taper la nouvelle date au format YYYY-MM-DD "));
+					competition.setDateCloture(dateCloture);}
+					else if(choix.equals("1")) {
+						choix = InOut.getString("\nVoulez-vous changer l'accesibilité de la compétition ?\n" +
+								"la competition est  " + competition.estEnEquipe() != null ? "enEquipe" : "n'estpas en equipe" + ".\n" +
+								"Taper 0 pour le changer 1 pour continuer ");
+						
+					}
+				
+					
+				}
+			}while(choix != null);
 		//inscriptions.reinitialiser();
-		try {
-	    nom=InOut.getString("\nSaisir le nom de la compétition");
-	    if(nom.equals("")) throw new NullPointerException("");
-		 choixenEquipe =InOut.getString("\nLa compétition est-elle pour les équipes "
-				+ "ou les personnes seules ?\n(tapez '1' pour équipes ou '0' pour personnes)\n");
-		if (choixenEquipe.equals("0") && choixenEquipe.equals("1")) throw new NumberFormatException("") ;
-		if(choixenEquipe.equals("1"))choixenEquipe = "true";
-		enEquipe = Boolean.valueOf(choixenEquipe);
-		datecloture = LocalDate.parse(InOut.getString("\nSaisir la date de clôture de la "
-		+ "compétition (au format yyyy-MM-dd)"));
-		if (datecloture == null ) throw new DateTimeException("");
-		}
-		catch(NumberFormatException e) {
-			System.out.println("Desolé vous n'avez pas respecté le format pour le choix de la competition en equipe");
-		}
-		catch(DateTimeException e){
-			System.out.println("Desolé vous n'avez pas respecté le format de la date imposé");
-		}
-		catch(NullPointerException e) {
-			System.out.println("Desolé vous n'avez pas respecté le format du nom de competition imposé");
-		}
+		
+	    
 		
 		//System.out.println("Avant boucle");
 		
-		if(!nom.isEmpty() && (datecloture!=null) && choixenEquipe.equals("0") || choixenEquipe.equals("1")) {
-		inscriptions.createCompetition(nom, datecloture, enEquipe);
-		System.out.println("Vous venez de creer la competition : "+ nom);}
-		else
-		System.out.println("Erreur de saisie");
 	
 	}
-
 }
