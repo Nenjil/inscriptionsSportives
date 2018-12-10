@@ -1,18 +1,14 @@
-package inscriptions.test ;
+package inscriptions.test;
 
-
+import static org.junit.jupiter.api.Assertions.*;
 import java.time.LocalDate;
-
-import org.junit.Test;
-
-
-
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import inscriptions.Competition;
 import inscriptions.Inscriptions;
 import inscriptions.Personne;
-import junit.framework.TestCase;
 
-public class Candidattest  extends TestCase{
+public class CandidatTest{
 
 	private String nomRobert = "Robert";
 	private String nomTony = "Tony";
@@ -22,10 +18,9 @@ public class Candidattest  extends TestCase{
 	private Competition testCompet2 ;
 
 
-	@Override
+	@BeforeEach
 	protected void setUp() throws Exception
 	{
-		super.setUp();
 		inscriptions = Inscriptions.getInscriptions();
 		tony = inscriptions.createPersonne(nomTony, "lala", "azerty");
 		testCompet = inscriptions.createCompetition("test", LocalDate.parse
@@ -36,16 +31,17 @@ public class Candidattest  extends TestCase{
 	
 	
 	@Test
-	public void testCandidat() throws Exception {
+	public void testCandidat(){
 		
-		Personne jean = inscriptions.createPersonne("pougetoux", "jean", "spyroo913@hotmail.com");
-		assertEquals("pougetoux", jean.getNom());
+		Personne alexandre = inscriptions.createPersonne("mesle", "alexandre", "iteration3@hotmail.com");
+		assertTrue("mesle" == alexandre.getNom());
 		
 	}
 	
 	@Test
-	public void testGetNom() throws Exception {
+	public void testGetNom() {
 		assertEquals(nomTony, tony.getNom());
+		
 	}
 
 	@Test
