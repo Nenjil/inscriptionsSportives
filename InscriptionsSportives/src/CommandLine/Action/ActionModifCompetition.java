@@ -17,6 +17,7 @@ public class ActionModifCompetition implements Action {
 	public ActionModifCompetition(Competition competition) {
 		this.competition = competition ;
 		inscriptions = Inscriptions.getInscriptions();
+		
 	}
 	
 	@Override

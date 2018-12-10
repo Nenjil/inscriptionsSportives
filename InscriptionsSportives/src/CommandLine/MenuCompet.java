@@ -24,6 +24,7 @@ public class MenuCompet  {
 			menuCompet.add(SelectCompet);
 			menuCompet.setAutoBack(true);
 			return menuCompet;	
+			
 		}
 
 

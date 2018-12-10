@@ -57,6 +57,7 @@ public class SelectListCompetOptions
 		competMenu.add(getModifCompetOption(competition));
 		competMenu.setAutoBack(true);
 		return competMenu;
+		
 	}
 
 	private Option getModifCompetOption(Competition competition) {
