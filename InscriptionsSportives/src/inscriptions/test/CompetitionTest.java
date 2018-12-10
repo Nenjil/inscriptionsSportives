@@ -1,11 +1,38 @@
 package inscriptions.test;
 
 import static org.junit.jupiter.api.Assertions.*;
-
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.Month;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import inscriptions.Competition;
+import inscriptions.Equipe;
+import inscriptions.Inscriptions;
+import inscriptions.Personne;
 
 class CompetitionTest {
 
+	
+	private String nomRobert = "Robert";
+	private String nomTony = "Tony";
+	private Inscriptions inscriptions;
+	private Personne tony ;
+	private Competition testCompet ;
+	private Competition testCompet2 ;
+	
+	@BeforeEach
+	protected void setUp() throws Exception
+	{
+		inscriptions = Inscriptions.getInscriptions();
+		tony = inscriptions.createPersonne(nomTony, "lala", "azerty");
+		testCompet = inscriptions.createCompetition("test", LocalDate.parse
+				("2018-02-10"), false);
+		testCompet2 = inscriptions.createCompetition("test", LocalDate.parse
+				("2018-02-10"), false);
+	}
+	
+	
 	@Test
 	void testCompetition() {
 		fail("Not yet implemented");
