@@ -1,18 +1,24 @@
 package CommandLine.Action;
+
 import java.time.DateTimeException;
 import java.time.LocalDate;
+
 import commandLineMenus.Action;
 import commandLineMenus.rendering.examples.util.InOut;
+import inscriptions.Competition;
 import inscriptions.Inscriptions;
 
+public class ActionModifCompetition implements Action {
 
-public class ActionAjoutCompet implements Action{
-private Inscriptions inscriptions;
+	
+	private Competition competition;
+	private Inscriptions inscriptions;
 
-public ActionAjoutCompet(Inscriptions inscriptions) {
-this.inscriptions = inscriptions;
-}
-
+	public ActionModifCompetition(Competition competition) {
+		this.competition = competition ;
+		inscriptions = Inscriptions.getInscriptions();
+	}
+	
 	@Override
 	public void optionSelected() {
 		LocalDate datecloture =null ;
@@ -41,7 +47,9 @@ this.inscriptions = inscriptions;
 		catch(NullPointerException e) {
 			System.out.println("Desolé vous n'avez pas respecté le format du nom de competition imposé");
 		}
-		System.out.println("Avant boucle");
+		
+		//System.out.println("Avant boucle");
+		
 		if(!nom.isEmpty() && (datecloture!=null) && choixenEquipe.equals("0") || choixenEquipe.equals("1")) {
 		inscriptions.createCompetition(nom, datecloture, enEquipe);
 		System.out.println("Vous venez de creer la competition : "+ nom);}
@@ -49,7 +57,5 @@ this.inscriptions = inscriptions;
 		System.out.println("Erreur de saisie");
 	
 	}
-	
-	
+
 }
-	
