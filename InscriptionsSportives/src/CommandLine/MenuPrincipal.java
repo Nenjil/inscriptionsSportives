@@ -1,5 +1,4 @@
 package CommandLine;
-import inscriptions.*;
 import commandLineMenus.*;
 import commandLineMenus.rendering.examples.util.InOut;
 public class MenuPrincipal {
@@ -59,7 +58,7 @@ public class MenuPrincipal {
 	// It is also advised to create each menu in a separated method
 	static Menu getCompetMenu()
 	{
-		Menu Competition = new MenuCompet("Menu competition","Competition","C");
+		Menu Competition = new MenuCompet().getMenuCompet();
 	
 		
 		return Competition;

@@ -1,37 +1,34 @@
 package CommandLine;
+import java.util.ArrayList;
+
 import CommandLine.Action.ActionVoirCandidats;
 import commandLineMenus.List;
+import commandLineMenus.ListData;
+import commandLineMenus.ListOption;
 import commandLineMenus.Menu;
 import commandLineMenus.Option;
 import inscriptions.Competition;
 import inscriptions.Inscriptions;
 
 
-public class SelectListCompetOptions extends Menu
+public class SelectListCompetOptions 
 
 {
-	private Competition competition=null;
-	
+
    private Inscriptions inscriptions ;
 
-	private java.util.List<String> compets;
-	
-	SelectListCompetOptions(java.util.List<String> compets)
+	public SelectListCompetOptions()
 	{
-		super("Select Compet","sc");
-		this.compets = compets;
+
 		inscriptions = Inscriptions.getInscriptions();
-		//List<String> list = getPeopleList();
-		//list.start();
+	
 	}
 
-	
-	
-	protected List<String> getPeopleList()
+	protected List<Competition> getCompetList()
 	{
-		List<String> liste = new List<>("Select compet","sc",
-				() -> compets,
-				(compets) -> getCompetMenu(compets)
+		List<Competition> liste = new List<>("Selection competition","sc",
+				getCompetitions(),
+				getCompetitionListOption()
 				);
 		
 		liste.setAutoBack(false);
@@ -40,19 +37,37 @@ public class SelectListCompetOptions extends Menu
 		return liste;
 	}
 	
-	private Option getCompetMenu(final String compet)
+	private ListData<Competition> getCompetitions()
+	{
+		return () -> new ArrayList<>(inscriptions.getCompetitions());
+	}
+	
+	private ListOption<Competition> getCompetitionListOption()
+	{
+		return (competition) -> getCompetMenuOptions(competition);
+	}
+	
+	private Option getCompetMenuOptions(final Competition competition)
 	{	
-		for ( Competition comp : inscriptions.getCompetitions()) {
-			if(comp.getNom().equals(compet))
-			competition= comp;}
-		
-		Menu competMenu = new Menu("Edit " + compet, compet, null);
-		competMenu.add(new Option("Voir les candidats", "v", new ActionVoirCandidats(competition)));
-		Option ajoutcandidat  = new ListAddCandidat("Ajouter un candidat", "ac", competition).listCandidat(); 
-		competMenu.add(ajoutcandidat);
-		// a continuer
-		competMenu.add(new Option("Supprimer un candidats", "rc"/*, new ActionVoirCandidats(competition)*/));
+		Menu competMenu = new Menu("Edit " + competition.getNom());
+		competMenu.add(getVoirCandidatsOption(competition));
+		competMenu.add(getAjoutCandidatsOption(competition));
+		//competMenu.add(getDeleteCandidatsOption());
 		competMenu.setAutoBack(true);
 		return competMenu;
+	}
+
+	private Option getDeleteCandidatsOption() {
+		return new Option("Supprimer un candidats", "rc"/*, new ActionVoirCandidats(competition)*/);
+	}
+
+	private Menu getAjoutCandidatsOption(final Competition competition) {
+		return new ListAddCandidat(competition).competListCandidat();
+	}
+	
+	
+	private Option getVoirCandidatsOption(Competition competition) 
+	{
+		return new Option("Voir les candidats", "v", new ActionVoirCandidats(competition));
 	}
 }

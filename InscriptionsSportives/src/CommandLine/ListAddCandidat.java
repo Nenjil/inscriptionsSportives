@@ -6,18 +6,17 @@ import java.util.ArrayList;
 import commandLineMenus.*;
 import inscriptions.*;
 
-public class ListAddCandidat extends Menu  {
+public class ListAddCandidat   {
 	final ArrayList<Candidat> candidats = new ArrayList<>();
 	private Inscriptions inscriptions;
 	private Competition competition;
 	
-	public ListAddCandidat(String shortTitle, String shortcut,Competition competition){
-		super(shortTitle, shortcut);
+	public ListAddCandidat(Competition competition){
 		inscriptions = Inscriptions.getInscriptions();
 		this.competition = competition;
 	}
 	
-	protected Menu listCandidat() {
+	protected Menu competListCandidat() {
 		
 		for(Candidat c : inscriptions.getCandidats()){
 			if((c instanceof Equipe && competition.estEnEquipe()) && !competition.getCandidats().contains(c)||
@@ -26,7 +25,7 @@ public class ListAddCandidat extends Menu  {
 				}
 			}
 				
-		List<Candidat> menu = new List<Candidat>(getTitle(),getShortcut(),
+		List<Candidat> menu = new List<Candidat>("ajout d'un candidat","ac",
 				new ListData<Candidat>()		
 				{
 					// Returns the data needed to refresh the list 
@@ -47,10 +46,8 @@ public class ListAddCandidat extends Menu  {
 						else{
 							
 							if(competition.estEnEquipe()){
-								
 									try 
-									{
-										
+									{							
 										competition.add((Equipe)candidat);
 										System.out.println("\n'" + candidat.toString() + "' est bien ajoutée à la compétition.");
 									} 
@@ -58,8 +55,6 @@ public class ListAddCandidat extends Menu  {
 									{
 										System.out.println(e.toString());
 									}
-									
-								
 							}
 							else{
 								try {
@@ -82,6 +77,7 @@ public class ListAddCandidat extends Menu  {
 				});
 			menu.addQuit("q");
 	        menu.addBack("b");
+	        
 			return menu; }
 }
 

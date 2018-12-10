@@ -1,5 +1,6 @@
 package CommandLine.Action;
 
+import java.io.IOException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import commandLineMenus.Action;
@@ -20,7 +21,7 @@ this.inscriptions = inscriptions;
 		String nom = "",choixenEquipe = "";
 		Boolean enEquipe = false;
 		
-		
+		inscriptions.reinitialiser();
 		try {
 	    nom=InOut.getString("\nSaisir le nom de la compétition");
 	    if(nom.equals("")) throw new NullPointerException("");
@@ -42,7 +43,8 @@ this.inscriptions = inscriptions;
 		catch(NullPointerException e) {
 			System.out.println("Desolé vous n'avez pas respecté le format du nom de competition imposé");
 		}
-		if(!nom.isEmpty() && (datecloture!=null) && (choixenEquipe.equals("0")) || (choixenEquipe.equals("1"))) {
+		System.out.println("Avant boucle");
+		if(!nom.isEmpty() && (datecloture!=null) && choixenEquipe.equals("0") || choixenEquipe.equals("1")) {
 		inscriptions.createCompetition(nom, datecloture, enEquipe);
 		System.out.println("Vous venez de creer la competition : "+ nom);}
 		else
