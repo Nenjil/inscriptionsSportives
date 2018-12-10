@@ -7,6 +7,7 @@ public class MenuPrincipal {
 	// Returns the root menu
 	static Menu getMainMenu()
 	{
+		
 		Menu mainMenu = new Menu("Main Menu");
 		
 		// Adds a submenu or an option is then done 
@@ -58,7 +59,8 @@ public class MenuPrincipal {
 	// It is also advised to create each menu in a separated method
 	static Menu getCompetMenu()
 	{
-		Menu Competition = MenuCompet.createMenuCompet("Menu competition","Competition","C");
+		Menu Competition = new MenuCompet("Menu competition","Competition","C");
+	
 		
 		return Competition;
 
@@ -68,5 +70,6 @@ public class MenuPrincipal {
 	{
 		Menu menu = getMainMenu();
 		menu.start();
+		
 	}
 }
