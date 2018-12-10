@@ -1,4 +1,5 @@
 package CommandLine.Action;
+import java.io.IOException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import commandLineMenus.Action;
@@ -17,7 +18,7 @@ this.inscriptions = inscriptions;
 	public void optionSelected() {
 		LocalDate datecloture =null ;
 		String nom = "",choixenEquipe = "";
-		Boolean enEquipe = false;
+		boolean enEquipe = false;
 		
 		//inscriptions.reinitialiser();
 		try {
@@ -27,7 +28,7 @@ this.inscriptions = inscriptions;
 				+ "ou les personnes seules ?\n(tapez '1' pour équipes ou '0' pour personnes)\n");
 		if (choixenEquipe.equals("0") && choixenEquipe.equals("1")) throw new NumberFormatException("") ;
 		if(choixenEquipe.equals("1"))choixenEquipe = "true";
-		enEquipe = Boolean.valueOf(choixenEquipe);
+		enEquipe = Boolean.parseBoolean(choixenEquipe);
 		datecloture = LocalDate.parse(InOut.getString("\nSaisir la date de clôture de la "
 		+ "compétition (au format yyyy-MM-dd)"));
 		if (datecloture == null ) throw new DateTimeException("");
@@ -42,11 +43,20 @@ this.inscriptions = inscriptions;
 			System.out.println("Desolé vous n'avez pas respecté le format du nom de competition imposé");
 		}
 		System.out.println("Avant boucle");
-		if(!nom.isEmpty() && (datecloture!=null) && choixenEquipe.equals("0") || choixenEquipe.equals("1")) {
+		if(!nom.isEmpty() && (datecloture!=null) && enEquipe|| !enEquipe) {
 		inscriptions.createCompetition(nom, datecloture, enEquipe);
 		System.out.println("Vous venez de creer la competition : "+ nom);}
 		else
 		System.out.println("Erreur de saisie");
+		
+		System.out.println(nom+enEquipe+datecloture);
+		
+		try {
+			inscriptions.sauvegarder();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	
 	}
 	

@@ -1,6 +1,7 @@
 package CommandLine;
 import java.util.ArrayList;
 
+import CommandLine.Action.ActionDeleteCompetition;
 import CommandLine.Action.ActionModifCompetition;
 import CommandLine.Action.ActionVoirCandidats;
 import commandLineMenus.List;
@@ -55,9 +56,14 @@ public class SelectListCompetOptions
 		competMenu.add(getAjoutCandidatsOption(competition));
 		competMenu.add(getDeleteCandidatsOption(competition));
 		competMenu.add(getModifCompetOption(competition));
+		competMenu.add(getDeletCompetOption(competition));
 		competMenu.setAutoBack(true);
 		return competMenu;
 		
+	}
+
+	private Option getDeletCompetOption(Competition competition) {
+		return new Option("Supprimer la competition", "dC", new ActionDeleteCompetition(competition));
 	}
 
 	private Option getModifCompetOption(Competition competition) {

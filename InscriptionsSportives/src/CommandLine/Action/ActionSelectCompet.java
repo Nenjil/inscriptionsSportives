@@ -18,7 +18,6 @@ public ActionSelectCompet(Inscriptions inscriptions) {
 
 	@Override
 	public void optionSelected() {
-			inscriptions = inscriptions.getInscriptions();
 		// Creates a list containing "Ginette", "Marcel" et "Gisèle"
 				final ArrayList<String> compets = new ArrayList<>();
 				for (Competition c : inscriptions.getCompetitions()) {
