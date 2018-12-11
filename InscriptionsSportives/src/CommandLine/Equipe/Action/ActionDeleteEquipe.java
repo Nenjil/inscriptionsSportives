@@ -3,6 +3,7 @@ import java.io.IOException;
 
 import commandLineMenus.Action;
 import commandLineMenus.rendering.examples.util.InOut;
+import inscriptions.Candidat;
 import inscriptions.Equipe;
 import inscriptions.Inscriptions;
 import inscriptions.Personne;
@@ -28,7 +29,8 @@ public class ActionDeleteEquipe implements Action{
 			System.out.println(membre.getPrenom()+membre.getNom()+" vient d'être supprimé(e) de l'équipe.");
 			equipe.remove(membre);
 			}
-		equipe.delete();	
+		equipe.delete();
+
 		System.out.println("Suppression effectuée");
 		try {
 			inscriptions.sauvegarder();
@@ -36,8 +38,9 @@ public class ActionDeleteEquipe implements Action{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		}
-		}
+	}
 		
 		
 	}

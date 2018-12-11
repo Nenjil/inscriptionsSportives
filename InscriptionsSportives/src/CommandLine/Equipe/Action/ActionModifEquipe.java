@@ -24,8 +24,7 @@ public class ActionModifEquipe implements Action{
 		public void optionSelected() {
 			
 			String newName = null;
-			do {
-			 newName = InOut.getString("Veuillez saisir le nouveau nom de l'équipe ou 'a' pour annuler"
+			newName = InOut.getString("Veuillez saisir le nouveau nom de l'équipe ou 'a' pour annuler"
 					+ ", ancien nom : " + equipe.getNom() + " nouveau nom : ");
 			if(newName != "a" && !newName.isEmpty()){
 			try {
@@ -37,7 +36,6 @@ public class ActionModifEquipe implements Action{
 			else if(newName.isEmpty()){
 			System.out.println("Votre entrée est vide.");
 			}
-		    }while(!newName.isEmpty());
 			
 			try {
 				inscriptions.sauvegarder();
