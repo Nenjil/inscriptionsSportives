@@ -1,4 +1,4 @@
-package CommandLine.Action;
+package CommandLine.Competition.Action;
 
 import java.util.ArrayList;
 import commandLineMenus.*;

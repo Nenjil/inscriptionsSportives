@@ -1,4 +1,4 @@
-package CommandLine.Action;
+package CommandLine.Competition.Action;
 
 import commandLineMenus.Action;
 import inscriptions.Competition;
@@ -18,8 +18,11 @@ this.inscriptions = inscriptions;
 			System.out.println("La liste des competitions est vide");
 			else {
 				for (Competition compet : inscriptions.getCompetitions()) {	
+					System.out.println("------------");
+					System.out.println("--------------");
 					System.out.println("Nom : "+ compet.getNom()+ " \nEn equipe : "+ compet.estEnEquipe()+ "\nCandidats : "+ compet.getCandidats());
-					System.out.println("--------------------------------------------------------------------");	}
+					System.out.print("--------------");
+					System.out.print("--------------");	}
 			}
 	}
 	

@@ -1,4 +1,4 @@
-package CommandLine.Action;
+package CommandLine.Competition.Action;
 
 import commandLineMenus.*;
 import inscriptions.Candidat;

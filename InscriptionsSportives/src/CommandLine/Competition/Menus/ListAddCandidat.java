@@ -1,4 +1,4 @@
-package CommandLine;
+package CommandLine.Competition.Menus;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -38,6 +38,7 @@ public class ListAddCandidat   {
 				new ListAction<Candidat>()
 				{				
 					// Triggered each time an item is selected
+					@Override
 					public void itemSelected(int index, Candidat candidat)
 					{
 						if(!competition.inscriptionsOuvertes()){
@@ -77,7 +78,6 @@ public class ListAddCandidat   {
 				});
 			menu.addQuit("q");
 	        menu.addBack("b");
-	        
 			return menu; }
 }
 

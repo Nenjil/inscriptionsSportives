@@ -1,4 +1,4 @@
-package CommandLine;
+package CommandLine.Competition.Menus;
 
 import java.io.IOException;
 import java.util.ArrayList;

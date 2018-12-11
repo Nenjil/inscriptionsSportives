@@ -1,9 +1,7 @@
-package CommandLine;
+package CommandLine.Competition.Menus;
 import java.util.ArrayList;
 
-import CommandLine.Action.ActionDeleteCompetition;
-import CommandLine.Action.ActionModifCompetition;
-import CommandLine.Action.ActionVoirCandidats;
+import CommandLine.Competition.Action.*;
 import commandLineMenus.List;
 import commandLineMenus.ListData;
 import commandLineMenus.ListOption;
@@ -16,27 +14,24 @@ import inscriptions.Inscriptions;
 public class SelectListCompetOptions 
 
 {
-
-   private Inscriptions inscriptions ;
+    private Inscriptions inscriptions ;
 
 	public SelectListCompetOptions()
 	{
-
 		inscriptions = Inscriptions.getInscriptions();
-	
 	}
 
 	protected List<Competition> getCompetList()
 	{
-		List<Competition> liste = new List<>("Selection competition","sc",
+		List<Competition> selectCompetListe = new List<>("Selection pour une competition","sc",
 				getCompetitions(),
 				getCompetitionListOption()
 				);
 		
-		liste.setAutoBack(false);
-		liste.addBack("r");
-		liste.addQuit("q");
-		return liste;
+		selectCompetListe.setAutoBack(false);
+		selectCompetListe.addBack("r");
+		selectCompetListe.addQuit("q");
+		return selectCompetListe;
 	}
 	
 	private ListData<Competition> getCompetitions()
@@ -63,11 +58,11 @@ public class SelectListCompetOptions
 	}
 
 	private Option getDeletCompetOption(Competition competition) {
-		return new Option("Supprimer la competition", "dC", new ActionDeleteCompetition(competition));
+		return new Option("Supprimer la competition", "dc", new ActionDeleteCompetition(competition));
 	}
 
 	private Option getModifCompetOption(Competition competition) {
-		return new Option("Modifier la competition", "mC", new ActionModifCompetition(competition));
+		return new Option("Modifier la competition", "mc", new ActionModifCompetition(competition));
 	}
 		
 	

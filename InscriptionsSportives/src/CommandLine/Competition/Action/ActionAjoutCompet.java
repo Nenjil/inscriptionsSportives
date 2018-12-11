@@ -1,4 +1,4 @@
-package CommandLine.Action;
+package CommandLine.Competition.Action;
 import java.io.IOException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
@@ -18,7 +18,7 @@ this.inscriptions = inscriptions;
 	public void optionSelected() {
 		LocalDate datecloture =null ;
 		String nom = "",choixenEquipe = "";
-		boolean enEquipe = false;
+		Boolean enEquipe = null;
 		
 		//inscriptions.reinitialiser();
 		try {
@@ -43,18 +43,16 @@ this.inscriptions = inscriptions;
 			System.out.println("Desolé vous n'avez pas respecté le format du nom de competition imposé");
 		}
 		System.out.println("Avant boucle");
-		if(!nom.isEmpty() && (datecloture!=null) && enEquipe|| !enEquipe) {
+		if((!nom.isEmpty()) && (datecloture!=null) && (enEquipe!=null)) {
 		inscriptions.createCompetition(nom, datecloture, enEquipe);
 		System.out.println("Vous venez de creer la competition : "+ nom);}
 		else
 		System.out.println("Erreur de saisie");
-		
-		System.out.println(nom+enEquipe+datecloture);
+		System.out.println("Vous avez tapé un nom "+nom+" un choix equipe "+enEquipe+" une date de cloture"+datecloture);
 		
 		try {
 			inscriptions.sauvegarder();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	
