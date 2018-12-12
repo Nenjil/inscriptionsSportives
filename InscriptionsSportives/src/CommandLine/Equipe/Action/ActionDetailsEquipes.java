@@ -4,11 +4,11 @@ import inscriptions.Equipe;
 import inscriptions.Inscriptions;
 import inscriptions.Personne;
 
-public class ActionDetailEquipes implements Action {
+public class ActionDetailsEquipes implements Action {
 
 	private Inscriptions inscriptions;
 
-	public ActionDetailEquipes(Inscriptions inscriptions) {
+	public ActionDetailsEquipes(Inscriptions inscriptions) {
 	this.inscriptions = inscriptions;
 	}
 

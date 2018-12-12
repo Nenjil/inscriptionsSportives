@@ -1,7 +1,7 @@
 package CommandLine.Equipe.Menus;
 
 import CommandLine.Equipe.Action.ActionAjoutEquipe;
-import CommandLine.Equipe.Action.ActionDetailEquipes;
+import CommandLine.Equipe.Action.ActionDetailsEquipes;
 import commandLineMenus.Menu;
 import commandLineMenus.Option;
 import inscriptions.Inscriptions;
@@ -19,7 +19,7 @@ public class MenuEquipe {
 	public Menu getMenuEquipe() {
 		Menu menuEquipe = new Menu("Menu des équipes","E");
 
-		menuEquipe.add(new Option ("Details des équipes", "de", new ActionDetailEquipes(inscriptions)));
+		menuEquipe.add(new Option ("Details des équipes", "de", new ActionDetailsEquipes(inscriptions)));
 		menuEquipe.add(new Option ("Ajout d'une equipe", "ae", new ActionAjoutEquipe(inscriptions)));
 		Menu SelectEquipe = new SelectListEquipeOptions().getEquipeList();
 		menuEquipe.add(SelectEquipe);

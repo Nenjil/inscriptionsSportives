@@ -23,7 +23,7 @@ public class ActionAjoutEquipe implements Action {
 				try 
 				{
 					inscriptions.createEquipe(nomEquipe);
-					System.out.println("Equipe :"+nomEquipe+"bien ajoutée.");
+					System.out.println("Equipe :"+nomEquipe+" à bien ajoutée.");
 				}
 				catch (Exception e) 
 				{

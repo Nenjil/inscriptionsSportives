@@ -1,6 +1,7 @@
 package CommandLine;
 import CommandLine.Competition.Menus.MenuCompet;
 import CommandLine.Equipe.Menus.MenuEquipe;
+import CommandLine.Personne.Menus.MenuPersonne;
 import commandLineMenus.*;
 public class MenuPrincipal {
 
@@ -11,13 +12,25 @@ public class MenuPrincipal {
 		Menu mainMenu = new Menu("Inscriptions sportives : Menu principal");
 		// Adds a submenu or an option is then done 
 		// with a method call
+		mainMenu.add(getPersonneMenu());
 		mainMenu.add(getEquipeMenu());
 		mainMenu.add(getCompetMenu());
-		mainMenu.addQuit("q");
+		mainMenu.addQuit("Q");
 		return mainMenu;
 	}
+	
+	
 
 	// It is also advised to create each menu in a separated method
+	static Menu getPersonneMenu()
+	{
+		Menu menuPersonne = new MenuPersonne().getMenuPersonne();
+		return menuPersonne;
+
+	}
+	
+	
+	
 	static Menu getCompetMenu()
 	{
 		Menu menuCompetition = new MenuCompet().getMenuCompet();

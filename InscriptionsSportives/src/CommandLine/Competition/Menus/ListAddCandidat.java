@@ -20,7 +20,7 @@ public class ListAddCandidat   {
 		
 		for(Candidat c : inscriptions.getCandidats()){
 			if((c instanceof Equipe && competition.estEnEquipe()) && !competition.getCandidats().contains(c)||
-					(c instanceof Personne && !competition.estEnEquipe() && !competition.getCandidats().contains(c))){	
+			(c instanceof Personne && !competition.estEnEquipe() && !competition.getCandidats().contains(c))){	
 				candidats.add(c);
 				}
 			}
