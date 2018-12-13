@@ -28,7 +28,6 @@ public class SelectListPersonneOptions {
 			
 			selectPersonList.setAutoBack(false);
 			selectPersonList.addBack("r");
-			selectPersonList.addQuit("q");
 			return selectPersonList;
 		}
 		

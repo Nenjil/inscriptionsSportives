@@ -42,7 +42,7 @@ this.inscriptions = inscriptions;
 		catch(NullPointerException e) {
 			System.out.println("Desolé vous n'avez pas respecté le format du nom de competition imposé");
 		}
-		System.out.println("Avant boucle");
+		//System.out.println("Avant boucle");
 		if((!nom.isEmpty()) && (datecloture!=null) && (enEquipe!=null)) {
 		inscriptions.createCompetition(nom, datecloture, enEquipe);
 		System.out.println("Vous venez de creer la competition : "+ nom);}

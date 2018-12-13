@@ -31,7 +31,6 @@ public class SelectListEquipeOptions {
 			
 			selectCompetListe.setAutoBack(false);
 			selectCompetListe.addBack("r");
-			selectCompetListe.addQuit("q");
 			return selectCompetListe;
 		}
 		

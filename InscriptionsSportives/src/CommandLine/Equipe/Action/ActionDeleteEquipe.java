@@ -3,7 +3,6 @@ import java.io.IOException;
 
 import commandLineMenus.Action;
 import commandLineMenus.rendering.examples.util.InOut;
-import inscriptions.Candidat;
 import inscriptions.Equipe;
 import inscriptions.Inscriptions;
 import inscriptions.Personne;

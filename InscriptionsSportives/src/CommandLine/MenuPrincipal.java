@@ -6,7 +6,7 @@ import commandLineMenus.*;
 public class MenuPrincipal {
 
 	// Returns the root menu
-	static Menu getMainMenu()
+	private static Menu getMainMenu()
 	{
 		
 		Menu mainMenu = new Menu("Inscriptions sportives : Menu principal");
@@ -18,26 +18,22 @@ public class MenuPrincipal {
 		mainMenu.addQuit("Q");
 		return mainMenu;
 	}
-	
-	
 
 	// It is also advised to create each menu in a separated method
-	static Menu getPersonneMenu()
+	private static Menu getPersonneMenu()
 	{
 		Menu menuPersonne = new MenuPersonne().getMenuPersonne();
 		return menuPersonne;
 
 	}
-	
-	
-	
-	static Menu getCompetMenu()
+
+	private static Menu getCompetMenu()
 	{
 		Menu menuCompetition = new MenuCompet().getMenuCompet();
 		return menuCompetition;
 
 	}
-	static Menu getEquipeMenu()
+	private	static Menu getEquipeMenu()
 	{
 		Menu menuEquipe = new MenuEquipe().getMenuEquipe();
 		return menuEquipe;

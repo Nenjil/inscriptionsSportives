@@ -21,6 +21,7 @@ public class MenuCompet  {
 			menuCompet.add(new Option ("Ajout d'une competition", "ac", new ActionAjoutCompet(inscriptions)));
 			Menu SelectCompet = new SelectListCompetOptions().getCompetList();
 			menuCompet.add(SelectCompet);
+			menuCompet.addBack("b");
 			menuCompet.setAutoBack(true);
 			
 			return menuCompet;		
