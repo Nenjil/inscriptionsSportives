@@ -1,5 +1,6 @@
 package inscriptions.test;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
 import java.io.IOException;
 import java.time.LocalDate;
@@ -26,10 +27,10 @@ class CompetitionTest {
 	{
 		inscriptions = Inscriptions.getInscriptions();
 		tony = inscriptions.createPersonne(nomTony, "lala", "azerty");
-		testCompet = inscriptions.createCompetition("test", LocalDate.parse
-				("2018-02-10"), false);
-		testCompet2 = inscriptions.createCompetition("test", LocalDate.parse
-				("2018-02-10"), false);
+		testCompet = inscriptions.createCompetition("test1", LocalDate.parse
+				("2019-02-10"), false);
+		testCompet2 = inscriptions.createCompetition("test2", LocalDate.parse
+				("2019-02-12"), false);
 	}
 	
 	
@@ -40,22 +41,24 @@ class CompetitionTest {
 
 	@Test
 	void testGetNom() {
-		fail("Not yet implemented");
+		assertEquals("test1", testCompet.getNom());;
+		
 	}
 
 	@Test
 	void testSetNom() {
-		fail("Not yet implemented");
+		testCompet.setNom("reussi");
+		assertEquals("reussi", testCompet.getNom());
 	}
 
 	@Test
 	void testInscriptionsOuvertes() {
-		fail("Not yet implemented");
+		assertTrue(testCompet.inscriptionsOuvertes() );
 	}
 
 	@Test
 	void testGetDateCloture() {
-		fail("Not yet implemented");
+		assertEquals("2019-02-10", testCompet.getDateCloture());
 	}
 
 	@Test
@@ -65,7 +68,10 @@ class CompetitionTest {
 
 	@Test
 	void testSetDateCloture() {
-		fail("Not yet implemented");
+		testCompet.setDateCloture(LocalDate.parse("2019-05-10"));
+		assertEquals("2019-05-10", testCompet.getDateCloture());
+		testCompet2.setDateCloture(LocalDate.parse("2019-01-10"));
+		assertEquals("2019-01-10", testCompet2.getDateCloture());
 	}
 
 	@Test
