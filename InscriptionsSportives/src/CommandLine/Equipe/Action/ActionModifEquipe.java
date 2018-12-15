@@ -40,7 +40,6 @@ public class ActionModifEquipe implements Action{
 			try {
 				inscriptions.sauvegarder();
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			}

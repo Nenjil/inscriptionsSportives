@@ -34,7 +34,6 @@ public class ActionDeleteEquipe implements Action{
 		try {
 			inscriptions.sauvegarder();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
