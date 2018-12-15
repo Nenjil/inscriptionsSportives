@@ -51,6 +51,7 @@ public class SelectListCompetOptions
 		competMenu.add(getDeleteCandidatsOption(competition));
 		competMenu.add(getModifCompetOption(competition));
 		competMenu.add(getDeletCompetOption(competition));
+		competMenu.addBack("r");
 		competMenu.setAutoBack(true);
 		return competMenu;
 		
@@ -79,5 +80,5 @@ public class SelectListCompetOptions
 	private Option getVoirCandidatsOption(Competition competition) 
 	{
 		return new Option("Voir les candidats", "v", new ActionVoirCandidats(competition));
-	}
+	}	
 }

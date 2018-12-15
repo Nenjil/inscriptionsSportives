@@ -24,8 +24,9 @@ public class ActionDeleteCompetition implements Action {
 	@Override
 	public void optionSelected() {
 	
-		String rep =InOut.getString("Etes vous sur de vouloir supprimer la competition (O/N) (cela supprimera tout les candidats "+competition.getNom()+" ?");
+		String rep =InOut.getString("Etes vous sur de vouloir supprimer la competition (O pour valider , n'importe quel autre caractère pour ne pas valider) (cela supprimera tout les candidats "+competition.getNom()+" ?");
 		rep.toUpperCase();
+		if(!rep.equals("O"))
 		if(rep.equals("O")) {
 		for (Candidat candidat : competition.getCandidats()) {
 		competition.remove(candidat)	;
@@ -34,11 +35,10 @@ public class ActionDeleteCompetition implements Action {
 		System.out.println("La competition a bien eté supprimée");
 		}
 		else
-		System.out.println("Une Erreur est survenue lors de la suppression");
+		System.out.println("La competition n'est pas supprimée");
 		try {
 			inscriptions.sauvegarder();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
