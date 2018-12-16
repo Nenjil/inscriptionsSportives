@@ -2,8 +2,6 @@ package inscriptions;
 
 import javax.persistence.*;
 
-import org.hibernate.HibernateException;
-
 public class testhibernate1 {
 
 public static void main(String[] args)  {
@@ -15,15 +13,15 @@ public static void main(String[] args)  {
 	emf = Persistence.createEntityManagerFactory("Test");
 	em = emf.createEntityManager();
 	
-	/*Competition c = em.find(Competition.class, 2);
-	System.out.println(c);*/
-	
+	Competition c = em.find(Competition.class,1);
+	System.out.println(c);
+
 	}
 	
 	
 	
-	catch(HibernateException exception){
-	     System.out.println("Problem creating session factory");
+	catch(PersistenceException exception){
+	     System.out.println("Problem de persistence");
 	     exception.printStackTrace();
 	}
 	

@@ -16,16 +16,37 @@ import javax.persistence.*;
 @Entity @Table(name="Competition")
 public class Competition implements Comparable<Competition>, Serializable
 {
+	
+	@Transient
 	private static final long serialVersionUID = -2882150118573759729L;
+	@Transient
 	private Inscriptions inscriptions;
-    @Id @GeneratedValue( strategy=GenerationType.IDENTITY )
+    @Id @GeneratedValue(strategy=GenerationType.IDENTITY )
 	private int NumCompet;
-    @Column (name="LibelleCompet")
+  
+    @SuppressWarnings("unused")
+	private int getNumCompet() {
+		return NumCompet;
+	}
+
+	@SuppressWarnings("unused")
+	private void setNumCompet(int numCompet) {
+		NumCompet = numCompet;
+	}
+
+	@Column (name="LibelleCompet")
 	private String nom;
+    @ManyToMany(mappedBy="competitions")
 	private Set<Candidat> candidats;
 	 @Column (name="Date_cloture")
 	private LocalDate dateCloture;
+	 @Column (name="EstEnEquipe")
 	private boolean enEquipe = false;
+	
+	
+	public Competition() {
+		// TODO Auto-generated constructor stub
+	}
 
 	Competition(Inscriptions inscriptions, String nom, LocalDate dateCloture, boolean enEquipe)
 	{

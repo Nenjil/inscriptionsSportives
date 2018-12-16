@@ -13,21 +13,36 @@ import javax.persistence.*;
  */
 
 @Entity @Table(name="Candidat")
-
+@Inheritance(strategy=InheritanceType.JOINED)
 public abstract class Candidat implements Comparable<Candidat>, Serializable
 {
-	private static final long serialVersionUID = -6035399822298694746L;
-	private Inscriptions inscriptions;
-	
-    @Id @GeneratedValue( strategy=GenerationType.IDENTITY )
-	private int num_candidat;
-    @Column (name="nom_candidat")
-    private String nom;
-	private Set<Competition> competitions;
-	
-	
 	public Candidat() {
 	}
+	
+	@Transient
+	private static final long serialVersionUID = -6035399822298694746L;
+	
+	@Transient
+	private Inscriptions inscriptions;
+    @Id @GeneratedValue( strategy=GenerationType.IDENTITY )
+	private int num_candidat;
+    @SuppressWarnings("unused")
+	private int getNum_candidat() {
+		return num_candidat;
+	}
+
+	@SuppressWarnings("unused")
+	private void setNum_candidat(int num_candidat) {
+		this.num_candidat = num_candidat;
+	}
+
+	@Column (name="nom_candidat")
+    private String nom;
+    @ManyToMany()
+    @JoinTable(name = "constituer", joinColumns = @JoinColumn(name = "num_candidat"),
+    inverseJoinColumns = @JoinColumn(name = "NumCompet"))
+	private Set<Competition> competitions;
+	
 	
 	Candidat(Inscriptions inscriptions, String nom)
 	{

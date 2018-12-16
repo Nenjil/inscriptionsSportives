@@ -5,8 +5,8 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 
 /**
  * Représente une Equipe. C'est-à-dire un ensemble de personnes pouvant 
@@ -14,11 +14,30 @@ import javax.persistence.Table;
  * 
  */
 @Entity @Table(name="Equipe")
+@PrimaryKeyJoinColumn(name="num_candidat")
 public class Equipe extends Candidat
 {
+	@Transient
 	private static final long serialVersionUID = 4147819927233466035L;
+	
+	@ManyToMany()
+	@JoinTable(name = "composer", joinColumns = @JoinColumn(name = "num_candidat_Personne"),
+    inverseJoinColumns = @JoinColumn(name = "num_candidat_Equipe"))
+	@OrderBy("num_candidat asc")
 	private SortedSet<Personne> membres = new TreeSet<>();
 	
+	// constructeur vide pour hibernate
+	public Equipe() {
+		
+	}
+	
+	/*
+	Equipe(Inscriptions inscriptions, String nom, SortedSet<Personne> membres)
+	{
+		super(inscriptions, nom);
+		membres = this.membres;
+	}
+	*/
 	Equipe(Inscriptions inscriptions, String nom)
 	{
 		super(inscriptions, nom);

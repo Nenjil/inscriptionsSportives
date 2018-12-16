@@ -10,14 +10,23 @@ import javax.persistence.*;
  * Représente une personne physique pouvant s'inscrire à une compétition.
  */
 @Entity @Table(name="Personne")
+@PrimaryKeyJoinColumn(name="num_candidat")
 public class Personne extends Candidat
 {
+	@Transient
 	private static final long serialVersionUID = 4434646724271327254L;
 	 @Column (name="prenom")
 	private String prenom;
 	 @Column (name="mail")
 	private String mail;
+	 
+	@ManyToMany(mappedBy="membres")
 	private Set<Equipe> equipes;
+	 
+	 
+	 // constructeur  vide pour hibernate
+	 public Personne() {
+	}
 	
 	Personne(Inscriptions inscriptions, String nom, String prenom, String mail)
 	{
