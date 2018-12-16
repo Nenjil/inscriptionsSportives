@@ -30,18 +30,21 @@ class CompetitionTest {
 		testCompet = inscriptions.createCompetition("test1", LocalDate.parse
 				("2019-02-10"), false);
 		testCompet2 = inscriptions.createCompetition("test2", LocalDate.parse
-				("2019-02-12"), false);
+				("2019-02-12"), true);
 	}
 	
 	
 	@Test
 	void testCompetition() {
-		fail("Not yet implemented");
+		Competition testCompet3 = inscriptions.createCompetition("handball", LocalDate.parse("2019-04-10"), true );
+		assertEquals("handball", testCompet3.getNom());
+		assertEquals(LocalDate.parse("2019-04-10"), testCompet3.getDateCloture());
+		assertTrue(testCompet3.estEnEquipe() );
 	}
 
 	@Test
 	void testGetNom() {
-		assertEquals("test1", testCompet.getNom());;
+		assertEquals("test1", testCompet.getNom());
 		
 	}
 
@@ -58,23 +61,23 @@ class CompetitionTest {
 
 	@Test
 	void testGetDateCloture() {
-		assertEquals("2019-02-10", testCompet.getDateCloture());
+		assertEquals(LocalDate.parse("2019-02-10"), testCompet.getDateCloture());
 	}
 
 	@Test
 	void testEstEnEquipe() {
-		fail("Not yet implemented");
+		assertTrue(testCompet2.estEnEquipe());
 	}
 
 	@Test
 	void testSetDateCloture() {
 		testCompet.setDateCloture(LocalDate.parse("2019-05-10"));
-		assertEquals("2019-05-10", testCompet.getDateCloture());
+		assertEquals(LocalDate.parse("2019-05-10"), testCompet.getDateCloture());
 		testCompet2.setDateCloture(LocalDate.parse("2019-01-10"));
-		assertEquals("2019-01-10", testCompet2.getDateCloture());
+		assertTrue(LocalDate.parse("2019-01-10") != testCompet2.getDateCloture());
 	}
 
-	@Test
+	/*@Test
 	void testGetCandidats() {
 		fail("Not yet implemented");
 	}
@@ -97,13 +100,15 @@ class CompetitionTest {
 	@Test
 	void testRemove() {
 		fail("Not yet implemented");
-	}
+	}*/
 
 	@Test
 	void testDelete() {
-		fail("Not yet implemented");
+		testCompet.delete();
+		assertEquals(false,inscriptions.getCompetitions().contains(testCompet));
+		
 	}
-
+	/*
 	@Test
 	void testCompareTo() {
 		fail("Not yet implemented");
@@ -112,6 +117,6 @@ class CompetitionTest {
 	@Test
 	void testToString() {
 		fail("Not yet implemented");
-	}
+	}*/
 
 }
