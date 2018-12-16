@@ -21,12 +21,14 @@ class CompetitionTest {
 	private Personne tony ;
 	private Competition testCompet ;
 	private Competition testCompet2 ;
+	private Equipe lesManouches;
 	
 	@BeforeEach
 	protected void setUp() throws Exception
 	{
 		inscriptions = Inscriptions.getInscriptions();
 		tony = inscriptions.createPersonne(nomTony, "lala", "azerty");
+		lesManouches = inscriptions.createEquipe("Les Manouches");
 		testCompet = inscriptions.createCompetition("test1", LocalDate.parse
 				("2019-02-10"), false);
 		testCompet2 = inscriptions.createCompetition("test2", LocalDate.parse
@@ -77,30 +79,39 @@ class CompetitionTest {
 		assertTrue(LocalDate.parse("2019-01-10") != testCompet2.getDateCloture());
 	}
 
-	/*@Test
+	@Test
 	void testGetCandidats() {
-		fail("Not yet implemented");
+		
+		testCompet.add(tony);
+		testCompet2.add(lesManouches);
+		assertTrue(testCompet.getCandidats().contains(tony));
+		assertTrue(testCompet2.getCandidats().contains(lesManouches));
+		
 	}
 
 	@Test
 	void testAddPersonne() {
-		fail("Not yet implemented");
+		testCompet.add(tony);
+		assertTrue(testCompet.getCandidats().contains(tony));
 	}
 
 	@Test
 	void testAddEquipe() {
-		fail("Not yet implemented");
+		testCompet2.add(lesManouches);
+		assertTrue(testCompet2.getCandidats().contains(lesManouches));
 	}
 
 	@Test
 	void testGetPersonnesAInscrire() {
-		fail("Not yet implemented");
+		assertTrue(testCompet.getPersonnesAInscrire().contains(tony));
 	}
 
 	@Test
 	void testRemove() {
-		fail("Not yet implemented");
-	}*/
+		testCompet.add(tony);
+		testCompet.remove(tony);
+		assertEquals(false, testCompet.getCandidats().contains(tony));
+	}
 
 	@Test
 	void testDelete() {
@@ -108,15 +119,17 @@ class CompetitionTest {
 		assertEquals(false,inscriptions.getCompetitions().contains(testCompet));
 		
 	}
-	/*
+	
 	@Test
 	void testCompareTo() {
-		fail("Not yet implemented");
+		assertEquals(0,testCompet.compareTo(testCompet));
+		assertEquals(-1,testCompet.compareTo(testCompet2));
+		
 	}
 
 	@Test
 	void testToString() {
-		fail("Not yet implemented");
-	}*/
+		assertEquals("test1", testCompet.toString());
+	}
 
 }
