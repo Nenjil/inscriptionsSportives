@@ -27,6 +27,7 @@ public class Competition implements Comparable<Competition>, Serializable
     @SuppressWarnings("unused")
 	private int getNumCompet() {
 		return NumCompet;
+	
 	}
 
 	@SuppressWarnings("unused")
