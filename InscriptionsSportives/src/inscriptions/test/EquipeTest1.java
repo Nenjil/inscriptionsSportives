@@ -38,8 +38,10 @@ class EquipeTest1 {
 	public void testDelete() {
 		Equipe equipe3 = inscriptions.createEquipe("RegisTeam");
 		assertTrue(inscriptions.getEquipes().contains(equipe3));
+		int nbequipe = inscriptions.getEquipes().size();
 		equipe3.delete();
 		assertFalse(inscriptions.getEquipes().contains(equipe3));
+		assertEquals(nbequipe -1,inscriptions.getEquipes().size());
 	}
 	
 	@Test
@@ -54,7 +56,8 @@ class EquipeTest1 {
 	@Test
 	public void testAddPersonne() {
 		lesManouches.add(tony);
-		assertEquals(true, lesManouches.getMembres().contains(tony));
+		assertTrue(lesManouches.getMembres().contains(tony));
+		assertTrue(tony.getEquipes().contains(lesManouches));
 	}
 
 	@Test

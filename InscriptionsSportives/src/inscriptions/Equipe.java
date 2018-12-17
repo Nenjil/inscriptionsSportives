@@ -27,7 +27,8 @@ public class Equipe extends Candidat
 	private SortedSet<Personne> membres = new TreeSet<>();
 	
 	// constructeur vide pour hibernate
-	public Equipe() {
+	@SuppressWarnings("unused")
+	private Equipe() {
 		
 	}
 	

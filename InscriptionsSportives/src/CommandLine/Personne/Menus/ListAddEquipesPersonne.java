@@ -6,7 +6,6 @@ import commandLineMenus.*;
 import inscriptions.*;
 
 public class ListAddEquipesPersonne  {
-	final ArrayList<Equipe> equipes = new ArrayList<>();
 	private Inscriptions inscriptions;
 	private Personne personne;
 	
@@ -17,7 +16,6 @@ public class ListAddEquipesPersonne  {
 	
 	protected Menu equipesListPersonne() {
 		//rempli l'arraylist d'equipes;
-		fillEquipes();
 		//cree un menu d'equipe
 		List<Equipe> menu = new List<Equipe>("ajout d'une personne dans une equipe","ate",
 				new ListData<Equipe>()		
@@ -26,7 +24,7 @@ public class ListAddEquipesPersonne  {
 					// each time it is displayed. 
 					public java.util.List<Equipe> getList()
 					{
-						return equipes;
+						return new ArrayList<>(inscriptions.getEquipes());
 					}	
 				},
 				new ListAction<Equipe>()
@@ -50,14 +48,6 @@ public class ListAddEquipesPersonne  {
 	        
 			return menu; }
 
-	private void fillEquipes() {
-		for (Equipe equipe : inscriptions.getEquipes()) {
-		equipes.add(equipe);	
-		}
-	
-	}
-
-	
 }
 
 
