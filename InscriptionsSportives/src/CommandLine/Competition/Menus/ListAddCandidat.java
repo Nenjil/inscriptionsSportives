@@ -7,7 +7,7 @@ import commandLineMenus.*;
 import inscriptions.*;
 
 public class ListAddCandidat   {
-	final ArrayList<Candidat> candidats = new ArrayList<>();
+	final java.util.List<Candidat> candidats = new ArrayList<>();
 	private Inscriptions inscriptions;
 	private Competition competition;
 	
@@ -18,12 +18,28 @@ public class ListAddCandidat   {
 	
 	protected Menu competListCandidat() {
 		
-		for(Candidat c : inscriptions.getCandidats()){
+		/*for(Candidat c : inscriptions.getCandidats()){
 			if((c instanceof Equipe && competition.estEnEquipe()) && !competition.getCandidats().contains(c)||
 			(c instanceof Personne && !competition.estEnEquipe() && !competition.getCandidats().contains(c))){	
 				candidats.add(c);
 				}
+			}*/
+		
+		if (competition.estEnEquipe()) {
+			for (Candidat candidat : competition.getEquipesAInscrire()) {
+			candidats.add(candidat);
 			}
+		}
+	    else {
+		    for (Candidat equipeAInscrire : competition.getEquipesAInscrire()) {
+		    	candidats.add(equipeAInscrire);
+		   }
+		    for (Candidat personneAInscrire : competition.getPersonnesAInscrire()) {
+		    	candidats.add(personneAInscrire);
+		   }
+	   }
+	    
+		
 							
 		List<Candidat> menu = new List<Candidat>("ajout d'un candidat","ac",
 				new ListData<Candidat>()		

@@ -15,6 +15,8 @@ public class Personne extends Candidat
 {
 	@Transient
 	private static final long serialVersionUID = 4434646724271327254L;
+	@Transient
+	private Inscriptions inscriptions;
 	 @Column (name="prenom")
 	private String prenom;
 	 @Column (name="mail")
@@ -24,10 +26,13 @@ public class Personne extends Candidat
 	private Set<Equipe> equipes;
 	 
 	 
-	 // constructeur  vide pour hibernate
-	 public Personne() {
+	// Constructeur sans paramètre pour hibernate
+	@SuppressWarnings("unused")
+	private Personne() {
+	inscriptions= Inscriptions.getInscriptions();	
 	}
 	
+	//Constructeur normal
 	Personne(Inscriptions inscriptions, String nom, String prenom, String mail)
 	{
 		super(inscriptions, nom);

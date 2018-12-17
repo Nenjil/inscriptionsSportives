@@ -16,9 +16,6 @@ import javax.persistence.*;
 @Inheritance(strategy=InheritanceType.JOINED)
 public abstract class Candidat implements Comparable<Candidat>, Serializable
 {
-	public Candidat() {
-	}
-	
 	@Transient
 	private static final long serialVersionUID = -6035399822298694746L;
 	
@@ -26,16 +23,6 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 	private Inscriptions inscriptions;
     @Id @GeneratedValue( strategy=GenerationType.IDENTITY )
 	private int num_candidat;
-    @SuppressWarnings("unused")
-	private int getNum_candidat() {
-		return num_candidat;
-	}
-
-	@SuppressWarnings("unused")
-	private void setNum_candidat(int num_candidat) {
-		this.num_candidat = num_candidat;
-	}
-
 	@Column (name="nom_candidat")
     private String nom;
     @ManyToMany()
@@ -49,6 +36,20 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 		this.inscriptions = inscriptions;	
 		this.nom = nom;
 		competitions = new TreeSet<>();
+	}
+	//constructeur sans parametres qui fetch la derniere insctance d'inscription pour hibernate
+	Candidat() {
+	inscriptions = Inscriptions.getInscriptions();
+	}
+	
+	@SuppressWarnings("unused")
+	private int getNum_candidat() {
+		return num_candidat;
+	}
+
+	@SuppressWarnings("unused")
+	private void setNum_candidat(int num_candidat) {
+		this.num_candidat = num_candidat;
 	}
 
 	/**
@@ -111,6 +112,6 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 	@Override
 	public String toString()
 	{
-		return "\n" + getNom() + " -> inscrit ├а " + getCompetitions();
+		return "\n" + getNom() + " -> inscrit ра " + getCompetitions();
 	}
 }

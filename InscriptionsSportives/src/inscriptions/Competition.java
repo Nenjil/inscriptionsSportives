@@ -23,18 +23,6 @@ public class Competition implements Comparable<Competition>, Serializable
 	private Inscriptions inscriptions;
     @Id @GeneratedValue(strategy=GenerationType.IDENTITY )
 	private int NumCompet;
-  
-    @SuppressWarnings("unused")
-	private int getNumCompet() {
-		return NumCompet;
-	
-	}
-
-	@SuppressWarnings("unused")
-	private void setNumCompet(int numCompet) {
-		NumCompet = numCompet;
-	}
-
 	@Column (name="LibelleCompet")
 	private String nom;
     @ManyToMany(mappedBy="competitions")
@@ -44,11 +32,13 @@ public class Competition implements Comparable<Competition>, Serializable
 	 @Column (name="EstEnEquipe")
 	private boolean enEquipe = false;
 	
-	
-	public Competition() {
-		// TODO Auto-generated constructor stub
+	// Constructeur sans param�tres pour hibernate
+	@SuppressWarnings("unused")
+	private Competition() {
+		inscriptions=Inscriptions.getInscriptions();
 	}
 
+	//Constructeur normal
 	Competition(Inscriptions inscriptions, String nom, LocalDate dateCloture, boolean enEquipe)
 	{
 		this.enEquipe = enEquipe;
@@ -58,11 +48,22 @@ public class Competition implements Comparable<Competition>, Serializable
 		candidats = new TreeSet<>();
 	}
 	
+	// getter et setter private pour hibernate
+	@SuppressWarnings("unused")
+	private int getNumCompet() {
+		return NumCompet;
+	}
+
+	@SuppressWarnings("unused")
+	private void setNumCompet(int numCompet) {
+		NumCompet = numCompet;
+	}
+	
+	
 	/**
 	 * Retourne le nom de la compétition.
 	 * @return
 	 */
-	
 	public String getNom()
 	{
 		return nom;
@@ -181,7 +182,7 @@ public class Competition implements Comparable<Competition>, Serializable
 	
 	/**
 	 * Retourne les personnes que l'on peut inscrire à cette competition.
-	 * @return les personnes que l'on peut inscrire à cette compétition.
+	 * @return les personnes que l'on peut inscrire � cette comp�tition.
 	 */
 	
 	public Set<Personne> getPersonnesAInscrire()
@@ -198,6 +199,21 @@ public class Competition implements Comparable<Competition>, Serializable
 		// TODO retourner les personnes que l'on peut inscrire à cette compétition.
 		return aInscrire ;
 	}
+	
+	/**
+	 * Retourne les equipes que l'on peut inscrire à cette competition.
+	 * @return les equipes que l'on peut inscrire à cette competition.
+	 */
+	
+	public Set<Equipe> getEquipesAInscrire()
+	{
+		Set<Equipe> aInscrire = new TreeSet<>(inscriptions.getEquipes());
+		// le removeall supprime toutes les equipes qui sont deja inscrites pour n'avoir que les equipes non inscrites
+		aInscrire.removeAll(getCandidats());
+		// TODO retourner les personnes que l'on peut inscrire à cette compétition.
+		return aInscrire ;
+	}
+
 
 	/**
 	 * Désinscrit un candidat.

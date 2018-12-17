@@ -19,18 +19,15 @@ public class Equipe extends Candidat
 {
 	@Transient
 	private static final long serialVersionUID = 4147819927233466035L;
-	
+	@Transient
+	private  Inscriptions inscriptions;
 	@ManyToMany()
 	@JoinTable(name = "composer", joinColumns = @JoinColumn(name = "num_candidat_Personne"),
     inverseJoinColumns = @JoinColumn(name = "num_candidat_Equipe"))
 	@OrderBy("num_candidat asc")
 	private SortedSet<Personne> membres = new TreeSet<>();
 	
-	// constructeur vide pour hibernate
-	@SuppressWarnings("unused")
-	private Equipe() {
-		
-	}
+
 	
 	/*
 	Equipe(Inscriptions inscriptions, String nom, SortedSet<Personne> membres)
@@ -43,7 +40,13 @@ public class Equipe extends Candidat
 	{
 		super(inscriptions, nom);
 	}
-
+	
+	//Constructeur normal
+	@SuppressWarnings("unused")
+	private Equipe() {
+	inscriptions= Inscriptions.getInscriptions();
+	}
+	
 	/**
 	 * Retourne l'ensemble des personnes formant l'équipe.
 	 */
