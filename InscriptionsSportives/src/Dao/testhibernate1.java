@@ -66,7 +66,7 @@ public static void main(String[] args)  {
 	   	transac.commit();
 	}
 	catch(PersistenceException exception){
-	     System.out.println("Problem de persistence");
+	     System.out.println("Probleme de persistence");
 	     exception.printStackTrace();
 	}
 
