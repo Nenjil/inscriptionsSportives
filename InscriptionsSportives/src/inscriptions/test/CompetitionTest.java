@@ -2,9 +2,7 @@ package inscriptions.test;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.jupiter.api.Assertions.*;
-import java.io.IOException;
 import java.time.LocalDate;
-import java.time.Month;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import inscriptions.Competition;
@@ -15,7 +13,7 @@ import inscriptions.Personne;
 class CompetitionTest {
 
 	
-	private String nomRobert = "Robert";
+//	private String nomRobert = "Robert";
 	private String nomTony = "Tony";
 	private Inscriptions inscriptions;
 	private Personne tony ;
