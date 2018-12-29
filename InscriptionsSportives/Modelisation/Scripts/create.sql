@@ -34,10 +34,9 @@ CREATE TABLE Candidat(
 #------------------------------------------------------------
 
 CREATE TABLE Personne(
-        num_candidat Int NOT NULL ,
+        num_candidat Int  NOT NULL  ,
         prenom       Varchar (50) NOT NULL ,
-        mail         Varchar (50) NOT NULL ,
-        nom_candidat Varchar (50) NOT NULL
+        mail         Varchar (50) NOT NULL 
 	,CONSTRAINT Personne_PK PRIMARY KEY (num_candidat)
 	)ENGINE=InnoDB;
 
@@ -47,8 +46,7 @@ CREATE TABLE Personne(
 #------------------------------------------------------------
 
 CREATE TABLE Equipe(
-        num_candidat Int NOT NULL ,
-        nom_candidat Varchar (50) NOT NULL
+        num_candidat  Int  NOT NULL 
 	,CONSTRAINT Equipe_PK PRIMARY KEY (num_candidat)
 	)ENGINE=InnoDB;
 

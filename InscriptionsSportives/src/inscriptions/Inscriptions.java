@@ -1,5 +1,6 @@
 package inscriptions;
 
+import Passerelle.Passerelle;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -154,6 +155,21 @@ public class Inscriptions implements Serializable
 		}
 		return inscriptions;
 	}
+	
+	public static Inscriptions getInscriptionsFromBdd()
+	{
+		if(inscriptions==null)
+		{Passerelle.initHibernate();
+		inscriptions = new Inscriptions();
+		inscriptions = Passerelle.getInscriptionsFromBdd(inscriptions);
+		Passerelle.close();
+		}
+		return inscriptions;
+	}
+
+	
+	
+	
 
 	/**
 	 * Retourne un object inscriptions vide. Ne modifie pas les compétitions
@@ -240,8 +256,8 @@ public class Inscriptions implements Serializable
 	
 	public static void main(String[] args)
 	{
-		Inscriptions inscriptions = Inscriptions.getInscriptions();
-		Competition flechettes = inscriptions.createCompetition("Mondial de fléchettes",LocalDate.parse("2018-12-18"), false);
+		Inscriptions inscriptions = Inscriptions.getInscriptionsFromBdd();
+		/*Competition flechettes = inscriptions.createCompetition("Mondial de fléchettes",LocalDate.parse("2019-12-18"), false);
 		Personne tony = inscriptions.createPersonne("Tony", "Dent de plomb", "azerty"), 
 				boris = inscriptions.createPersonne("Boris", "le Hachoir", "ytreza");
 		flechettes.add(tony);
@@ -249,9 +265,9 @@ public class Inscriptions implements Serializable
 		lesManouches.add(boris);
 		lesManouches.add(tony);
 		System.out.println(inscriptions);
-		lesManouches.delete();
-		System.out.println(inscriptions);
-
+		lesManouches.delete();*/
+		
+/*
 		try
 		{
 			inscriptions.sauvegarder();
@@ -259,6 +275,7 @@ public class Inscriptions implements Serializable
 		catch (IOException e)
 		{
 			System.out.println("Sauvegarde impossible." + e);
-		}
+		}*/
+	//System.out.println(inscriptions);
 	}
 }

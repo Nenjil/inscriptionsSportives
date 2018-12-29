@@ -24,23 +24,7 @@ public class ListAddCandidat   {
 				candidats.add(c);
 				}
 			}*/
-		
-		if (competition.estEnEquipe()) {
-			for (Candidat candidat : competition.getEquipesAInscrire()) {
-			candidats.add(candidat);
-			}
-		}
-	    else {
-		    for (Candidat equipeAInscrire : competition.getEquipesAInscrire()) {
-		    	candidats.add(equipeAInscrire);
-		   }
-		    for (Candidat personneAInscrire : competition.getPersonnesAInscrire()) {
-		    	candidats.add(personneAInscrire);
-		   }
-	   }
-	    
-		
-							
+					
 		List<Candidat> menu = new List<Candidat>("ajout d'un candidat","ac",
 				new ListData<Candidat>()		
 				{
@@ -48,6 +32,17 @@ public class ListAddCandidat   {
 					// each time it is displayed. 
 					public java.util.List<Candidat> getList()
 					{
+						if(competition.estEnEquipe()) {
+							for (Candidat candidat : competition.getEquipesAInscrire()) {
+								candidats.add(candidat);
+							}
+						}
+						else {
+							for (Candidat candidat : competition.getPersonnesAInscrire()) {
+								candidats.add(candidat);
+							}
+						}
+						
 						return candidats;
 					}	
 				},

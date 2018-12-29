@@ -21,9 +21,8 @@ public class Equipe extends Candidat
 	private static final long serialVersionUID = 4147819927233466035L;
 	@Transient
 	private  Inscriptions inscriptions;
-	@ManyToMany()
-	@JoinTable(name = "composer", joinColumns = @JoinColumn(name = "num_candidat_Personne"),
-    inverseJoinColumns = @JoinColumn(name = "num_candidat_Equipe"))
+	@ManyToMany(mappedBy="equipes", cascade = CascadeType.PERSIST)
+	
 	@OrderBy("num_candidat asc")
 	private SortedSet<Personne> membres = new TreeSet<>();
 	

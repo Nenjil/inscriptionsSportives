@@ -25,9 +25,10 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 	private int num_candidat;
 	@Column (name="nom_candidat")
     private String nom;
-    @ManyToMany()
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "constituer", joinColumns = @JoinColumn(name = "num_candidat"),
     inverseJoinColumns = @JoinColumn(name = "NumCompet"))
+   
 	private Set<Competition> competitions;
 	
 	
