@@ -8,7 +8,6 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 import org.hibernate.HibernateException;
-import org.hibernate.Transaction;
 
 import inscriptions.Candidat;
 import inscriptions.Competition;
@@ -95,74 +94,38 @@ public abstract class Passerelle
 		inscription = setPersonneFromBdd(inscription);
 		inscription = setEquipesFromBdd(inscription);
 		inscription = setCompetitionsFromBdd(inscription);
-		inscription = setCompetCandidatsFromBdd(inscription);
 	
 		return inscription; 
 	 }
 	
-	// !!!!!!!! Cette methode est a revoir car  trop gourmande 3 boucles imbriquées !!!!!!!!!
-	private static Inscriptions setJoueursFromBdd(Inscriptions inscription) {
+	private static Inscriptions setPersonneFromBdd(Inscriptions inscription) {
 		@SuppressWarnings("unchecked")
-		List<Personne> membres =  em.createQuery("select membres from Equipe ").getResultList();
-		//pour chaque equipe deja crée dans java dans (le garbage) 
-		for (Equipe equipe : inscription.getEquipes()) {
-			// on recupere les membres d'equipe de la bDD
-			for (Personne membre : membres) {
-				// on parcoure chaque equipe de ses membres
-				for (Equipe team : membre.getEquipes()) {
-					// si l'equipe de la bdd est egale a l'equipe crée dans java on y ajoute tout ses membres
-					if(team.getNom().equals(equipe.getNom()) && !equipe.getMembres().contains(membre)) {
-						equipe.add(membre);
-					//	System.out.println(membre.getNom()+" ajouté a "+equipe.getNom());
-					}				
-				}	
-			}	
+		List<Personne> personnes =  em.createQuery("from Personne").getResultList();
+		for (Personne personne : personnes) {
+			inscription.createPersonne(personne.getNom(), personne.getPrenom(), personne.getMail());	
 		}
-		System.out.println(inscription);
-		return inscription;
-	}
-
-	// !!!!!!!! Cette methode est a revoir car  trop gourmande 3 boucles imbriquées !!!!!!!!!
-	private static Inscriptions setCompetCandidatsFromBdd(Inscriptions inscription) {
-		@SuppressWarnings("unchecked")
-		List<Candidat> candidats = em.createQuery("select candidats from Competition").getResultList();
-		for (Competition compet : inscription.getCompetitions()) {
-			for (Candidat candidat : candidats) {
-				for (Competition compett : candidat.getCompetitions()) {
-					if(compett.getNom().equals(compet.getNom())){
-						if(candidat instanceof Personne)
-							compet.add((Personne)candidat);
-						else
-							compet.add((Equipe)candidat);
-					}
-				}
-			}	
-		}	
 		return inscription;
 	}
 	
-
 	private static Inscriptions setEquipesFromBdd(Inscriptions inscription) {
 		
 		@SuppressWarnings("unchecked")
 		List<Equipe> equipes =  em.createQuery("from Equipe").getResultList();
 		for (Equipe equipe : equipes) {
 			if(!inscription.getCandidats().contains(equipe)) {
-				inscription.createEquipe(equipe.getNom());	
+				Equipe team = inscription.createEquipe(equipe.getNom());
+				@SuppressWarnings("unchecked")
+				List<Personne> membres =  em.createQuery("select membres from Equipe as equipe where equipe.nom=:team ").setParameter("team", team.getNom()).getResultList();
+				for (Personne membre :membres) {
+					if(!team.getMembres().contains(membre)) {
+						//System.out.println("Avant"+team.getMembres());
+						team.add(membre);
+						//System.out.println(membre.getNom()+" ajoute à "+ team.getNom());
+						//System.out.println("Apres"+team.getMembres());
+					}
+					
+				}
 			}
-		}
-		inscription = setJoueursFromBdd(inscription);
-		
-		return inscription;
-	}
-	
-	
-
-	private static Inscriptions setPersonneFromBdd(Inscriptions inscription) {
-		@SuppressWarnings("unchecked")
-		List<Personne> personnes =  em.createQuery("from Personne").getResultList();
-		for (Personne personne : personnes) {
-		inscription.createPersonne(personne.getNom(), personne.getPrenom(), personne.getMail());	
 		}
 		return inscription;
 	}
@@ -171,8 +134,23 @@ public abstract class Passerelle
 		@SuppressWarnings("unchecked")
 		List<Competition>compets = em.createQuery("from Competition").getResultList();
 		for (Competition compet : compets) {
-		//System.out.println(compet.getNom()+ " "+ compet.getDateCloture() + " "+ compet.estEnEquipe());
-		inscription.createCompetition(compet.getNom(),compet.getDateCloture(),compet.estEnEquipe());
+			if(!inscription.getCompetitions().contains(compet)) {
+				Competition compete =inscription.createCompetition(compet.getNom(),compet.getDateCloture(),compet.estEnEquipe());
+				System.out.println(compete.getNom()+" a ete crée");
+				@SuppressWarnings({ "unchecked", "unused" })
+				List<Candidat> candidats = em.createQuery("select candidats from Competition as compet where compet.nom =:nom and compet.dateCloture=:date ")
+				.setParameter("nom", compete.getNom()).setParameter("date", compete.getDateCloture()).getResultList();
+				for (Candidat candi : compet.getCandidats()) {
+					if(!compete.getCandidats().contains(candi)) {
+						if(candi instanceof Personne) {
+						compete.add((Personne) candi);}
+						else {
+							compete.add((Equipe) candi);
+						}
+					System.out.println(candi.getNom()+"a ete ajouté a la compet : "+compete.getNom());
+					}
+				}
+			}
 		}
 
 		return inscription;

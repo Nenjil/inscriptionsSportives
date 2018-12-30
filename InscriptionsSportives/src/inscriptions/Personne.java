@@ -22,7 +22,7 @@ public class Personne extends Candidat
 	 @Column (name="mail")
 	private String mail;
 	 
-	@ManyToMany( cascade = CascadeType.ALL)
+	@ManyToMany( cascade = CascadeType.PERSIST)
 	@JoinTable(name = "composer", joinColumns = @JoinColumn(name = "num_candidat_Personne"),
     inverseJoinColumns = @JoinColumn(name = "num_candidat_Equipe"))
 	private Set<Equipe> equipes;
