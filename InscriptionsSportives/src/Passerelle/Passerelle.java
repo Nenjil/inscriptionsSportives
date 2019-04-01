@@ -63,7 +63,7 @@ public abstract class Passerelle
 	  em.flush();
 	 }
 	
-	 static void save(Object o)
+	 public static void save(Object o)
 	 {
 		 EntityTransaction transaction = em.getTransaction();
 		 transaction.begin();
@@ -91,9 +91,9 @@ public abstract class Passerelle
 	 
 	 
 	public static Inscriptions getInscriptionsFromBdd(Inscriptions inscription) {		
-		inscription = setPersonneFromBdd(inscription);
-		inscription = setEquipesFromBdd(inscription);
-		inscription = setCompetitionsFromBdd(inscription);
+		setPersonneFromBdd(inscription);
+		setEquipesFromBdd(inscription);
+		setCompetitionsFromBdd(inscription);
 	
 		return inscription; 
 	 }
@@ -137,19 +137,19 @@ public abstract class Passerelle
 			if(!inscription.getCompetitions().contains(compet)) {
 				Competition compete =inscription.createCompetition(compet.getNom(),compet.getDateCloture(),compet.estEnEquipe());
 				System.out.println(compete.getNom()+" a ete crée");
-				@SuppressWarnings({ "unchecked", "unused" })
-				List<Candidat> candidats = em.createQuery("select candidats from Competition as compet where compet.nom =:nom and compet.dateCloture=:date ")
-				.setParameter("nom", compete.getNom()).setParameter("date", compete.getDateCloture()).getResultList();
-				for (Candidat candi : compet.getCandidats()) {
-					if(!compete.getCandidats().contains(candi)) {
-						if(candi instanceof Personne) {
-						compete.add((Personne) candi);}
-						else {
-							compete.add((Equipe) candi);
-						}
-					System.out.println(candi.getNom()+"a ete ajouté a la compet : "+compete.getNom());
-					}
-				}
+//				@SuppressWarnings({ "unchecked", "unused" })
+//				List<Candidat> candidats = em.createQuery("select candidats from Competition as compet where compet.nom =:nom and compet.dateCloture=:date ")
+//				.setParameter("nom", compete.getNom()).setParameter("date", compete.getDateCloture()).getResultList();
+//				for (Candidat candi : compet.getCandidats()) {
+//					if(!compete.getCandidats().contains(candi)) {
+//						if(candi instanceof Personne) {
+//						compete.add((Personne) candi);}
+//						else {
+//							compete.add((Equipe) candi);
+//						}
+//					System.out.println(candi.getNom()+"a ete ajouté a la compet : "+compete.getNom());
+//					}
+//				}
 			}
 		}
 

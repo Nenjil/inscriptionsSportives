@@ -23,6 +23,8 @@ public class Inscriptions implements Serializable
 	private static final long serialVersionUID = -3095339436048473524L;
 	private static final String FILE_NAME = "Inscriptions.srz";
 	private static Inscriptions inscriptions;
+	public static boolean HIBERNATE = false; 
+	// plus boolean pour indiquer si en  chargement ou non 
 	
 	private SortedSet<Competition> competitions = new TreeSet<>();
 	private SortedSet<Candidat> candidats = new TreeSet<>();
@@ -149,7 +151,10 @@ public class Inscriptions implements Serializable
 		
 		if (inscriptions == null)
 		{
-			inscriptions = readObject();
+			if (!HIBERNATE)
+				inscriptions = readObject();
+			else
+				inscriptions = getInscriptionsFromBdd();
 			if (inscriptions == null)
 				inscriptions = new Inscriptions();
 		}
@@ -159,10 +164,11 @@ public class Inscriptions implements Serializable
 	public static Inscriptions getInscriptionsFromBdd()
 	{
 		if(inscriptions==null)
-		{Passerelle.initHibernate();
-		inscriptions = new Inscriptions();
-		inscriptions = Passerelle.getInscriptionsFromBdd(inscriptions);
-		Passerelle.close();
+		{
+			Passerelle.initHibernate();
+			inscriptions = new Inscriptions();
+			Passerelle.getInscriptionsFromBdd(inscriptions);
+			Passerelle.close();
 		}
 		return inscriptions;
 	}

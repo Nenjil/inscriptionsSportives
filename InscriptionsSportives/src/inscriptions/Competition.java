@@ -46,6 +46,8 @@ public class Competition implements Comparable<Competition>, Serializable
 		this.nom = nom;
 		this.dateCloture = dateCloture;
 		candidats = new TreeSet<>();
+		if (inscriptions.HIBERNATE)
+			Passerelle.Passerelle.save(this);
 	}
 	
 	// getter et setter private pour hibernate
