@@ -114,17 +114,11 @@ public abstract class Passerelle
 		for (Equipe equipe : equipes) {
 			if(!inscription.getCandidats().contains(equipe)) {
 				Equipe team = inscription.createEquipe(equipe.getNom());
-				@SuppressWarnings("unchecked")
-				List<Personne> membres =  em.createQuery("select membres from Equipe as equipe where equipe.nom=:team ").setParameter("team", team.getNom()).getResultList();
-				for (Personne membre :membres) {
-					if(!team.getMembres().contains(membre)) {
-						//System.out.println("Avant"+team.getMembres());
-						team.add(membre);
-						//System.out.println(membre.getNom()+" ajoute à "+ team.getNom());
-						//System.out.println("Apres"+team.getMembres());
-					}
-					
-				}
+				System.out.print("Equipe :"+team.getNom());
+				System.out.println(" Membres : "+equipe.getMembres());
+				System.out.println();
+				
+	
 			}
 		}
 		return inscription;
@@ -137,19 +131,8 @@ public abstract class Passerelle
 			if(!inscription.getCompetitions().contains(compet)) {
 				Competition compete =inscription.createCompetition(compet.getNom(),compet.getDateCloture(),compet.estEnEquipe());
 				System.out.println(compete.getNom()+" a ete crée");
-//				@SuppressWarnings({ "unchecked", "unused" })
-//				List<Candidat> candidats = em.createQuery("select candidats from Competition as compet where compet.nom =:nom and compet.dateCloture=:date ")
-//				.setParameter("nom", compete.getNom()).setParameter("date", compete.getDateCloture()).getResultList();
-//				for (Candidat candi : compet.getCandidats()) {
-//					if(!compete.getCandidats().contains(candi)) {
-//						if(candi instanceof Personne) {
-//						compete.add((Personne) candi);}
-//						else {
-//							compete.add((Equipe) candi);
-//						}
-//					System.out.println(candi.getNom()+"a ete ajouté a la compet : "+compete.getNom());
-//					}
-//				}
+				System.out.println("candidats : "+compet.getCandidats());
+
 			}
 		}
 
