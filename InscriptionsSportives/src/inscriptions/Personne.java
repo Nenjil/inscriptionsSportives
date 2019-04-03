@@ -6,6 +6,8 @@ import java.util.TreeSet;
 
 import javax.persistence.*;
 
+import Passerelle.Passerelle;
+
 /**
  * Représente une personne physique pouvant s'inscrire à une compétition.
  */
@@ -31,7 +33,7 @@ public class Personne extends Candidat
 	// Constructeur sans param�tre pour hibernate
 	@SuppressWarnings("unused")
 	private Personne() {
-	inscriptions= Inscriptions.getInscriptions();	
+		//inscriptions= Inscriptions.getInscriptions();	
 	}
 	
 	//Constructeur normal
@@ -41,6 +43,9 @@ public class Personne extends Candidat
 		this.prenom = prenom;
 		this.mail = mail;
 		equipes = new TreeSet<>();
+		if(Inscriptions.HIBERNATE)
+			Passerelle.save(this);
+		
 	}
 
 	/**

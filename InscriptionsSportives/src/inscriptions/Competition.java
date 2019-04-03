@@ -8,6 +8,8 @@ import java.util.TreeSet;
 
 import javax.persistence.*;
 
+import Passerelle.Passerelle;
+
 /**
  * Représente une compétition, c'est-à-dire un ensemble de candidats 
  * inscrits à un événement, les inscriptions sont closes à la date dateCloture.
@@ -35,7 +37,7 @@ public class Competition implements Comparable<Competition>, Serializable
 	// Constructeur sans param�tres pour hibernate
 	@SuppressWarnings("unused")
 	private Competition() {
-		inscriptions=Inscriptions.getInscriptions();
+		//inscriptions=Inscriptions.getInscriptions();
 	}
 
 	//Constructeur normal
@@ -46,8 +48,8 @@ public class Competition implements Comparable<Competition>, Serializable
 		this.nom = nom;
 		this.dateCloture = dateCloture;
 		candidats = new TreeSet<>();
-		if (inscriptions.HIBERNATE)
-			Passerelle.Passerelle.save(this);
+		if(Inscriptions.HIBERNATE)
+			Passerelle.save(this);
 	}
 	
 	// getter et setter private pour hibernate
@@ -158,6 +160,8 @@ public class Competition implements Comparable<Competition>, Serializable
 		throw new RuntimeException( "Cette competition est en equipe. Nous ne pouvons donc pas ajouter"+personne.getNom());
 
 		personne.add(this);
+		if(Inscriptions.HIBERNATE)
+			Passerelle.save(this);
 		return candidats.add(personne);
 
 		
@@ -226,7 +230,10 @@ public class Competition implements Comparable<Competition>, Serializable
 	public boolean remove(Candidat candidat)
 	{
 		candidat.remove(this);
+		if(Inscriptions.HIBERNATE)
+			Passerelle.delete(this);
 		return candidats.remove(candidat);
+	
 	}
 	
 	/**
@@ -238,6 +245,8 @@ public class Competition implements Comparable<Competition>, Serializable
 		for (Candidat candidat : candidats)
 			remove(candidat);
 		inscriptions.delete(this);
+		if(Inscriptions.HIBERNATE)
+			Passerelle.delete(this);
 	}
 	
 	@Override

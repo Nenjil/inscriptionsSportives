@@ -6,6 +6,8 @@ import java.util.Set;
 import java.util.TreeSet;
 import javax.persistence.*;
 
+import Passerelle.Passerelle;
+
 
 /**
  * Candidat à un événement sportif, soit une personne physique, soit une équipe.
@@ -37,10 +39,12 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 		this.inscriptions = inscriptions;	
 		this.nom = nom;
 		competitions = new TreeSet<>();
+		if(Inscriptions.HIBERNATE)
+			Passerelle.save(this);
 	}
 	//constructeur sans parametres qui fetch la derniere insctance d'inscription pour hibernate
 	Candidat() {
-	inscriptions = Inscriptions.getInscriptions();
+		//inscriptions = Inscriptions.getInscriptions();
 	}
 	
 	@SuppressWarnings("unused")
@@ -99,9 +103,12 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 	
 	public void delete()
 	{
-		for (Competition c : competitions)
+		for (Competition c : competitions) {
 			c.remove(this);
+		}
 		inscriptions.delete(this);
+		if(Inscriptions.HIBERNATE)
+			Passerelle.delete(this);
 	}
 	
 	@Override

@@ -7,6 +7,8 @@ import java.util.TreeSet;
 
 import javax.persistence.*;
 
+import Passerelle.Passerelle;
+
 
 /**
  * Représente une Equipe. C'est-à-dire un ensemble de personnes pouvant 
@@ -38,12 +40,14 @@ public class Equipe extends Candidat
 	Equipe(Inscriptions inscriptions, String nom)
 	{
 		super(inscriptions, nom);
+		if(Inscriptions.HIBERNATE)
+			Passerelle.save(this);
 	}
 	
 	//Constructeur normal
 	@SuppressWarnings("unused")
 	private Equipe() {
-	inscriptions= Inscriptions.getInscriptions();
+		//inscriptions= Inscriptions.getInscriptions();
 	}
 	
 	/**
@@ -64,6 +68,8 @@ public class Equipe extends Candidat
 	public boolean add(Personne membre)
 	{
 		membre.add(this);
+		if(Inscriptions.HIBERNATE)
+			Passerelle.save(this);
 		return membres.add(membre);
 	}
 
@@ -76,6 +82,8 @@ public class Equipe extends Candidat
 	public boolean remove(Personne membre)
 	{
 		membre.remove(this);
+		if(Inscriptions.HIBERNATE)
+			Passerelle.delete(membre);
 		return membres.remove(membre);
 	}
 

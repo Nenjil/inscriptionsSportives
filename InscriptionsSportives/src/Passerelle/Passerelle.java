@@ -53,14 +53,14 @@ public abstract class Passerelle
 	   emf.close();
 	 }
 	
-	 static void delete(Object o)
+	 public static void delete(Object o)
 	 {
 	  EntityTransaction transaction = em.getTransaction();
 	  transaction.begin();
 	  em.remove(o);
 	  transaction.commit();
 	  transaction = null;
-	  em.flush();
+	 // em.flush();
 	 }
 	
 	 public static void save(Object o)
@@ -70,7 +70,7 @@ public abstract class Passerelle
 		 em.persist(o);
 		 transaction.commit();
 		 transaction = null;
-		 em.flush();
+		// em.flush();
 	
 	 }
 	
@@ -114,9 +114,9 @@ public abstract class Passerelle
 		for (Equipe equipe : equipes) {
 			if(!inscription.getCandidats().contains(equipe)) {
 				Equipe team = inscription.createEquipe(equipe.getNom());
-				System.out.print("Equipe :"+team.getNom());
+				/*System.out.print("Equipe :"+team.getNom());
 				System.out.println(" Membres : "+equipe.getMembres());
-				System.out.println();
+				System.out.println();*/
 				
 	
 			}
@@ -130,8 +130,8 @@ public abstract class Passerelle
 		for (Competition compet : compets) {
 			if(!inscription.getCompetitions().contains(compet)) {
 				Competition compete =inscription.createCompetition(compet.getNom(),compet.getDateCloture(),compet.estEnEquipe());
-				System.out.println(compete.getNom()+" a ete crée");
-				System.out.println("candidats : "+compet.getCandidats());
+			/*	System.out.println(compete.getNom()+" a ete crée");
+				System.out.println("candidats : "+compet.getCandidats());*/
 
 			}
 		}

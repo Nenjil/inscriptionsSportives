@@ -23,7 +23,7 @@ public class Inscriptions implements Serializable
 	private static final long serialVersionUID = -3095339436048473524L;
 	private static final String FILE_NAME = "Inscriptions.srz";
 	private static Inscriptions inscriptions;
-	public static boolean HIBERNATE = false; 
+	public static boolean HIBERNATE = true; 
 	// plus boolean pour indiquer si en  chargement ou non 
 	
 	private SortedSet<Competition> competitions = new TreeSet<>();
@@ -95,6 +95,7 @@ public class Inscriptions implements Serializable
 	{
 		Competition competition = new Competition(this, nom, dateCloture, enEquipe);
 		competitions.add(competition);
+		//Passerelle.save(competition);
 		return competition;
 	}
 
@@ -138,6 +139,8 @@ public class Inscriptions implements Serializable
 	void delete(Candidat candidat)
 	{
 		candidats.remove(candidat);
+		if(Inscriptions.HIBERNATE)
+			Passerelle.delete(candidat);
 	}
 	
 	/**
@@ -168,7 +171,7 @@ public class Inscriptions implements Serializable
 			Passerelle.initHibernate();
 			inscriptions = new Inscriptions();
 			Passerelle.getInscriptionsFromBdd(inscriptions);
-			Passerelle.close();
+			
 		}
 		return inscriptions;
 	}
@@ -262,26 +265,31 @@ public class Inscriptions implements Serializable
 	
 	public static void main(String[] args)
 	{
-		Inscriptions inscriptions = Inscriptions.getInscriptionsFromBdd();
-		/*Competition flechettes = inscriptions.createCompetition("Mondial de fléchettes",LocalDate.parse("2019-12-18"), false);
+		Inscriptions inscriptions = Inscriptions.getInscriptions();
+		
+		Competition flechettes = inscriptions.createCompetition("Mondial de fléchettes",LocalDate.parse("2019-12-18"), false);
 		Personne tony = inscriptions.createPersonne("Tony", "Dent de plomb", "azerty"), 
 				boris = inscriptions.createPersonne("Boris", "le Hachoir", "ytreza");
 		flechettes.add(tony);
 		Equipe lesManouches = inscriptions.createEquipe("Les Manouches");
 		lesManouches.add(boris);
 		lesManouches.add(tony);
-		System.out.println(inscriptions);
-		lesManouches.delete();*/
+		lesManouches.delete();
 		
-/*
-		try
-		{
-			inscriptions.sauvegarder();
-		} 
-		catch (IOException e)
-		{
-			System.out.println("Sauvegarde impossible." + e);
-		}*/
-	//System.out.println(inscriptions);
+		//Passerelle.close();
+		
+		
+		System.out.println(inscriptions);
+		
+		if(!Inscriptions.HIBERNATE) {
+			try
+			{
+				inscriptions.sauvegarder();
+			} 
+			catch (IOException e)
+			{
+				System.out.println("Sauvegarde impossible." + e);
+			}
+		}
 	}
 }
