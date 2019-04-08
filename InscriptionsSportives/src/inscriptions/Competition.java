@@ -1,6 +1,7 @@
 package inscriptions;
 
 import java.io.Serializable;
+
 import java.util.Collections;
 import java.time.LocalDate;
 import java.util.Set;
@@ -80,6 +81,8 @@ public class Competition implements Comparable<Competition>, Serializable
 	public void setNom(String nom)
 	{
 		this.nom = nom ;
+		if(Inscriptions.HIBERNATE)
+			Passerelle.save(this);
 	}
 	
 	/**

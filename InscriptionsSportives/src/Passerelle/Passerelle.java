@@ -113,12 +113,9 @@ public abstract class Passerelle
 		List<Equipe> equipes =  em.createQuery("from Equipe").getResultList();
 		for (Equipe equipe : equipes) {
 			if(!inscription.getCandidats().contains(equipe)) {
+				@SuppressWarnings("unused")
 				Equipe team = inscription.createEquipe(equipe.getNom());
-				/*System.out.print("Equipe :"+team.getNom());
-				System.out.println(" Membres : "+equipe.getMembres());
-				System.out.println();*/
 				
-	
 			}
 		}
 		return inscription;
@@ -130,8 +127,6 @@ public abstract class Passerelle
 		for (Competition compet : compets) {
 			if(!inscription.getCompetitions().contains(compet)) {
 				Competition compete =inscription.createCompetition(compet.getNom(),compet.getDateCloture(),compet.estEnEquipe());
-			/*	System.out.println(compete.getNom()+" a ete crée");
-				System.out.println("candidats : "+compet.getCandidats());*/
 
 			}
 		}

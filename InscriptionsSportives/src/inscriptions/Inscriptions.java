@@ -138,6 +138,8 @@ public class Inscriptions implements Serializable
 	
 	void delete(Candidat candidat)
 	{
+		//System.out.println("candidats :"+candidats);
+		//System.out.println("candidat :"+candidat);
 		candidats.remove(candidat);
 		if(Inscriptions.HIBERNATE)
 			Passerelle.delete(candidat);
@@ -269,15 +271,15 @@ public class Inscriptions implements Serializable
 		
 		Competition flechettes = inscriptions.createCompetition("Mondial de fléchettes",LocalDate.parse("2019-12-18"), false);
 		Personne tony = inscriptions.createPersonne("Tony", "Dent de plomb", "azerty"), 
-				boris = inscriptions.createPersonne("Boris", "le Hachoir", "ytreza");
+		boris = inscriptions.createPersonne("Boris", "le Hachoir", "ytreza");
 		flechettes.add(tony);
+		flechettes.setNom("Mondial modifié");
 		Equipe lesManouches = inscriptions.createEquipe("Les Manouches");
 		lesManouches.add(boris);
 		lesManouches.add(tony);
+		//lesManouches.remove(boris);
+		lesManouches.remove(tony);
 		lesManouches.delete();
-		
-		//Passerelle.close();
-		
 		
 		System.out.println(inscriptions);
 		

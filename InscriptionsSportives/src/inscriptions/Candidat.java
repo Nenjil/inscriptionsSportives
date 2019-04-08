@@ -107,8 +107,6 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 			c.remove(this);
 		}
 		inscriptions.delete(this);
-		if(Inscriptions.HIBERNATE)
-			Passerelle.delete(this);
 	}
 	
 	@Override

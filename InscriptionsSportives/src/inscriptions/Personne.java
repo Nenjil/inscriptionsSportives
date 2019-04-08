@@ -66,6 +66,8 @@ public class Personne extends Candidat
 	public void setPrenom(String prenom)
 	{
 		this.prenom = prenom;
+		if(Inscriptions.HIBERNATE)
+			Passerelle.save(this);
 	}
 
 	/**
@@ -86,6 +88,8 @@ public class Personne extends Candidat
 	public void setMail(String mail)
 	{
 		this.mail = mail;
+		if(Inscriptions.HIBERNATE)
+			Passerelle.save(this);
 	}
 
 	/**
