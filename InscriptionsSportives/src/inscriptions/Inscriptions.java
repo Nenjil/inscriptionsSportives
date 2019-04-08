@@ -12,6 +12,8 @@ import java.time.LocalDate;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import org.hibernate.sql.Delete;
+
 /**
  * Point d'entrée dans l'application, un seul objet de type Inscription
  * permet de gérer les compétitions, candidats (de type equipe ou personne)
@@ -134,6 +136,9 @@ public class Inscriptions implements Serializable
 	void delete(Competition competition)
 	{
 		competitions.remove(competition);
+		if(HIBERNATE)
+			Passerelle.delete(competition);
+		
 	}
 	
 	void delete(Candidat candidat)
@@ -141,7 +146,7 @@ public class Inscriptions implements Serializable
 		//System.out.println("candidats :"+candidats);
 		//System.out.println("candidat :"+candidat);
 		candidats.remove(candidat);
-		if(Inscriptions.HIBERNATE)
+		if(HIBERNATE)
 			Passerelle.delete(candidat);
 	}
 	
@@ -275,9 +280,11 @@ public class Inscriptions implements Serializable
 		flechettes.add(tony);
 		flechettes.setNom("Mondial modifié");
 		Equipe lesManouches = inscriptions.createEquipe("Les Manouches");
+		Competition flechettes2 = inscriptions.createCompetition("Mondial de fléchettes2",LocalDate.parse("2019-12-18"), false);
+		inscriptions.delete(flechettes2);
 		lesManouches.add(boris);
 		lesManouches.add(tony);
-		//lesManouches.remove(boris);
+		lesManouches.remove(boris);
 		lesManouches.remove(tony);
 		lesManouches.delete();
 		

@@ -185,6 +185,8 @@ public class Competition implements Comparable<Competition>, Serializable
 		if (!enEquipe || !inscriptionsOuvertes())
 			throw new RuntimeException();
 		equipe.add(this);
+		if(Inscriptions.HIBERNATE)
+			Passerelle.save(this);
 		return candidats.add(equipe);
 		
 	}
