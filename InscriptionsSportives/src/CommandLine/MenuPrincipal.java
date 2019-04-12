@@ -44,6 +44,7 @@ public class MenuPrincipal {
 	{
 		Menu menu = getMainMenu();
 		menu.start();
+		Passerelle.Passerelle.close();
 		
 	}
 }

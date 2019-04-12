@@ -30,13 +30,15 @@ public class ActionAjoutEquipe implements Action {
 					System.out.println(e.toString());
 				}
 				
-				try {
-					inscriptions.sauvegarder();
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+				if (!Inscriptions.HIBERNATE) {
+					try {
+						inscriptions.sauvegarder();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					}
 				}
-			}	
 		}
 		
 		

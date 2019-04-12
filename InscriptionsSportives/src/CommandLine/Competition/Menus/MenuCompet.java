@@ -11,6 +11,7 @@ public class MenuCompet  {
 	
 		public MenuCompet() {
 		inscriptions = Inscriptions.getInscriptions();
+	
 		}
 
 		public Menu getMenuCompet() {

@@ -50,10 +50,13 @@ public class ActionModifCompetition implements Action {
 				choix="1";}
 			if (choix.equals("1")) {
 				System.out.println("la competition "+competition.getNom()+" a bien été modifiée selon vos choix.");
+				
+				if (!Inscriptions.HIBERNATE) {
 				try {
 					inscriptions.sauvegarder();
 				} catch (IOException e) {
 					e.printStackTrace();
+				}
 				}
 			}
 		}

@@ -55,9 +55,10 @@ public abstract class Passerelle
 	
 	 public static void delete(Object o)
 	 {
+		 System.out.println(o);
 	  EntityTransaction transaction = em.getTransaction();
 	  transaction.begin();
-	  em.remove(o);
+	  em.remove(em.contains(o) ? o : em.merge(o));
 	  transaction.commit();
 	  transaction = null;
 	 // em.flush();
