@@ -28,13 +28,13 @@
 	<classpathentry kind="lib" path="lib/mysql-connector-java-5.1.25-bin.jar"/>
 	<classpathentry kind="lib" path="lib/stax-ex-1.8.jar"/>
 	<classpathentry kind="lib" path="lib/txw2-2.3.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Administrateur/Desktop/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.base.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Administrateur/Desktop/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.controls.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Administrateur/Desktop/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.fxml.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Administrateur/Desktop/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.graphics.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Administrateur/Desktop/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.media.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Administrateur/Desktop/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.swing.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Administrateur/Desktop/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx.web.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Administrateur/Desktop/openjfx-11.0.2_windows-x64_bin-sdk/javafx-sdk-11.0.2/lib/javafx-swt.jar"/>
+	<classpathentry kind="lib" path="lib/javafx-swt.jar"/>
+	<classpathentry kind="lib" path="lib/javafx.base.jar"/>
+	<classpathentry kind="lib" path="lib/javafx.controls.jar"/>
+	<classpathentry kind="lib" path="lib/javafx.fxml.jar"/>
+	<classpathentry kind="lib" path="lib/javafx.graphics.jar"/>
+	<classpathentry kind="lib" path="lib/javafx.media.jar"/>
+	<classpathentry kind="lib" path="lib/javafx.swing.jar"/>
+	<classpathentry kind="lib" path="lib/javafx.web.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
