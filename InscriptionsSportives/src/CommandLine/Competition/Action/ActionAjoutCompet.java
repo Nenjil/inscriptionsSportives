@@ -19,7 +19,8 @@ this.inscriptions = inscriptions;
 		LocalDate datecloture =null ;
 		String nom = "",choixenEquipe = "";
 		Boolean enEquipe = null;
-		
+		LocalDate Dateactuelle = LocalDate.now();
+		Boolean Datecorrecte = false;
 		//inscriptions.reinitialiser();
 		try {
 		    nom=InOut.getString("\nSaisir le nom de la compétition");
@@ -29,10 +30,19 @@ this.inscriptions = inscriptions;
 			if (choixenEquipe.equals("0") && choixenEquipe.equals("1")) throw new NumberFormatException("") ;
 				if(choixenEquipe.equals("1"))choixenEquipe = "true";
 					enEquipe = Boolean.parseBoolean(choixenEquipe);
+			do {
 					datecloture = LocalDate.parse(InOut.getString("\nSaisir la date de clôture de la "
 							+ "compétition (au format yyyy-MM-dd)"));
-				if (datecloture == null ) throw new DateTimeException("");
-			}
+					if (datecloture.compareTo(Dateactuelle) < 0) 
+						System.out.println("Date périmée");
+					else 
+						Datecorrecte = true;
+				if (datecloture == null ) 
+					throw new DateTimeException("");
+				else 
+					Datecorrecte = true;
+				
+			} while(Datecorrecte == false);
 			catch(NumberFormatException e) {
 				System.out.println("Desolé vous n'avez pas respecté le format pour le choix de la competition en equipe");
 			}
