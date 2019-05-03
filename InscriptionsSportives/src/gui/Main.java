@@ -11,7 +11,7 @@ public class Main extends Application {
 	
     public void start(Stage primaryStage) throws Exception {
 
-        Parent parent = FXMLLoader.load(getClass().getResource("main.fxml"));
+        Parent parent = FXMLLoader.load(getClass().getResource("fxml/main.fxml"));
         Scene scene = new Scene(parent);
         primaryStage.setTitle("Inscriptions Sportives");
         primaryStage.setScene(scene);

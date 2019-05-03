@@ -20,54 +20,56 @@ this.inscriptions = inscriptions;
 		String nom = "",choixenEquipe = "";
 		Boolean enEquipe = null;
 		LocalDate Dateactuelle = LocalDate.now();
-		Boolean Datecorrecte = false;
+		String quit = "0"; 
 		//inscriptions.reinitialiser();
+		while(!quit.equals("1") ){
 		try {
-		    nom=InOut.getString("\nSaisir le nom de la compétition");
-		    if(nom.equals("")) throw new NullPointerException("");
-			 	choixenEquipe =InOut.getString("\nLa compétition est-elle pour les équipes "
-					+ "ou les personnes seules ?\n(tapez '1' pour équipes ou '0' pour personnes)\n");
-			if (choixenEquipe.equals("0") && choixenEquipe.equals("1")) throw new NumberFormatException("") ;
-				if(choixenEquipe.equals("1"))choixenEquipe = "true";
-					enEquipe = Boolean.parseBoolean(choixenEquipe);
-			do {
-					datecloture = LocalDate.parse(InOut.getString("\nSaisir la date de clôture de la "
-							+ "compétition (au format yyyy-MM-dd)"));
-					if (datecloture.compareTo(Dateactuelle) < 0) 
-						System.out.println("Date périmée");
-					else 
-						Datecorrecte = true;
-				if (datecloture == null ) 
-					throw new DateTimeException("");
-				else 
-					Datecorrecte = true;
+			    nom=InOut.getString("\n Saisir le nom de la compétition");
+			    if(nom.equals("")) 
+			    	throw new NullPointerException("");
+			    choixenEquipe =InOut.getString("\nLa compétition est-elle pour les équipes "
+				+ "ou les personnes seules ?\n(tapez '1' pour équipes ou '0' pour personnes)\n");
+				if (!choixenEquipe.equals("0") && !choixenEquipe.equals("1") || choixenEquipe.isEmpty()) 
+						throw new NumberFormatException("") ;
+				if (choixenEquipe.equals("1"))choixenEquipe = "true";
+						enEquipe = Boolean.parseBoolean(choixenEquipe);
 				
-			} while(Datecorrecte == false);
+				datecloture = LocalDate.parse(InOut.getString("\nSaisir la date de clôture de la "
+				+ "compétition (au format yyyy-MM-dd)"));
+						
+				if (datecloture == null || datecloture.compareTo(Dateactuelle) < 0 ) 
+				throw new DateTimeException("");
+		
+				}
+		
 			catch(NumberFormatException e) {
 				System.out.println("Desolé vous n'avez pas respecté le format pour le choix de la competition en equipe");
 			}
 			catch(DateTimeException e){
-				System.out.println("Desolé vous n'avez pas respecté le format de la date imposé");
+				System.out.println("Désolé la date doit ne doit ni être nulle ni depassée");
 			}
 			catch(NullPointerException e) {
 				System.out.println("Desolé vous n'avez pas respecté le format du nom de competition imposé");
 			}
+			quit =InOut.getString("Taper 0 pour recommencer la saisie "
+				+ "ou 1 pour valider \n");
 		
-			//System.out.println("Avant boucle");
-			if((!nom.isEmpty()) && (datecloture!=null) && (enEquipe!=null)) {
+		}
+	
+		if((!nom.isEmpty()) && (datecloture!=null) && (enEquipe!=null)) {
 			inscriptions.createCompetition(nom, datecloture, enEquipe);
-			System.out.println("Vous venez de creer la competition : "+ nom);}
-			else
-			System.out.println("Erreur de saisie");
-			System.out.println("Vous avez tapé un nom "+nom+" un choix equipe "+enEquipe+" une date de cloture"+datecloture);
+			System.out.println("Vous venez de creer la competition : "+ nom);
+		}
+		else
+			System.out.println("Erreur lors de la création");
 			
-			if (!Inscriptions.HIBERNATE) {
+		if (!Inscriptions.HIBERNATE) {
 			try {
 				inscriptions.sauvegarder();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			}
+		}
 	
 	}
 	
