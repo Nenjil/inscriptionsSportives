@@ -15,7 +15,7 @@ public class Main extends Application {
         Scene scene = new Scene(parent);
         primaryStage.setTitle("Inscriptions Sportives");
         primaryStage.setScene(scene);
-     //   scene.getStylesheets().add(getClass().getResource("main.css").toString());
+      //  scene.getStylesheets().add(getClass().getResource("css/main.css").toString());
         primaryStage.show();
     }
 
