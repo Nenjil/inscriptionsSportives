@@ -20,16 +20,22 @@ import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
 public class MenuPersonneController implements Initializable {
-
+	 
+	//cette variable va charger la dans la méthode initialize() la scene précédente
+	private String previouslocation="";
+	  
+	 
 	@FXML
 	ListView <Personne> listview= new ListView<Personne>();
 	
 	@FXML
 	public void backtoMainMenu(ActionEvent e) throws IOException {
-		//chargement du xml lié
-	    Parent parent = FXMLLoader.load(getClass().getResource("../fxml/main.fxml"));
+		//chargement de la scene precedente
+	    Parent parent = FXMLLoader.load(getClass().getResource("../fxml/"+previouslocation));
 	    //creation d'une nouvelle scene basée sur le fxml 
+	  //  System.out.println(getClass().getResource());
         Scene scene = new Scene(parent);
+       // System.out.println(this.location.getFile());
         //Recuperation de la fenetre principale pour creer une nouvelle scene
 		Stage primaryStage = (Stage) ((Node)e.getSource()).getScene().getWindow() ; 
 		primaryStage.setScene(scene);
@@ -47,11 +53,21 @@ public class MenuPersonneController implements Initializable {
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		Inscriptions inscriptions =  Inscriptions.getInscriptions();
+	/*	Inscriptions inscriptions =  Inscriptions.getInscriptions();
 		ObservableList<Personne>personnes = FXCollections.observableArrayList(inscriptions.getPersonnes());
-		listview.setItems(personnes);
+		listview.setItems(personnes);*/
+		this.setPreviousLocation(arg0.getFile());
+
 	}
 	
-	
+	private void setPreviousLocation(String file) {
+		if(file.endsWith("VoirPersonnes.fxml"))
+		{
+			this.previouslocation="MenuPersonne.fxml"; 
+		}
+		else 
+			this.previouslocation="main.fxml";
+		
+	}
 
 }

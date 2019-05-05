@@ -30,7 +30,7 @@
          <children>
             <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Ajouter une équipe" />
             <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Gerer les équipes" />
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Voir les équipes" />
+            <Button alignment="CENTER" contentDisplay="CENTER" onAction= "#getVoirEquipes" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Voir les équipes" />
          </children>
          <BorderPane.margin>
             <Insets bottom="50.0" />
