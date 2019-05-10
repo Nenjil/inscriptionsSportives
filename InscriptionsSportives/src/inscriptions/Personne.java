@@ -43,7 +43,7 @@ public class Personne extends Candidat
 		this.prenom = prenom;
 		this.mail = mail;
 		equipes = new TreeSet<>();
-		if(Inscriptions.HIBERNATE)
+		if(Inscriptions.HIBERNATE && !Inscriptions.LOADING)
 			Passerelle.save(this);
 		
 	}

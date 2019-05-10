@@ -14,8 +14,8 @@
          <items>
             <TableView fx:id="competsTable" prefHeight="398.0" prefWidth="354.0">
               <columns>
-                <TableColumn fx:id="nomcompet" prefWidth="150.0" text="nom compétition" />
-                <TableColumn fx:id="enequipe" minWidth="5.0" prefWidth="35.20752716064453" text="en équipe ?" />
+                <TableColumn fx:id="nomcompet" prefWidth="150.0" text="nom compÃ©tition" />
+                <TableColumn fx:id="enequipe" minWidth="5.0" prefWidth="35.20752716064453" text="en Ã©quipe ?" />
                 <TableColumn fx:id="datecloture" prefWidth="168.45285034179688" text="date cloture" />
               </columns>
                <columnResizePolicy>
@@ -26,10 +26,10 @@
       </SplitPane>
       <VBox alignment="BOTTOM_CENTER" layoutX="350.0" layoutY="96.0" prefHeight="200.0" prefWidth="249.0" spacing="15.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" text="Supprimer la competition" />
+            <Button mnemonicParsing="false" prefHeight="26.0"  onAction="#handleDeleteCompet" prefWidth="150.0" text="Supprimer la competition" />
           <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" text="Modifier la competition" />
             <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" text="Ajouter un candidat" />
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" text="supprimer un candidat" />
+            <Button mnemonicParsing="false" prefHeight="26.0"  prefWidth="150.0" text="supprimer un candidat" />
             <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" text="Voir candidats">
                <VBox.margin>
                   <Insets bottom="15.0" />

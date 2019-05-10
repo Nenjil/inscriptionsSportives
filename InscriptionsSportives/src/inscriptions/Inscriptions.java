@@ -26,6 +26,7 @@ public class Inscriptions implements Serializable
 	private static final String FILE_NAME = "Inscriptions.srz";
 	private static Inscriptions inscriptions;
 	public static boolean HIBERNATE = true; 
+	public static boolean LOADING = false ;  
 	// plus boolean pour indiquer si en  chargement ou non 
 	
 	private SortedSet<Competition> competitions = new TreeSet<>();

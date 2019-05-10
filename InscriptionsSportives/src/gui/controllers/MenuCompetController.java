@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 
 import com.sun.javafx.collections.ObservableSequentialListWrapper;
 
+import inscriptions.Candidat;
 import inscriptions.Competition;
 import inscriptions.Inscriptions;
 import javafx.beans.property.ReadOnlyBooleanWrapper;
@@ -72,6 +73,19 @@ public class MenuCompetController implements Initializable {
 		
 	}
 	
+	@FXML
+	public void handleDeleteCompet(ActionEvent e) throws IOException {
+		
+		Competition competselected= competsTable.getSelectionModel().getSelectedItem() ;
+		
+		for (Candidat candidat : competselected.getCandidats()) {
+			competselected.remove(candidat)	;
+		}
+		competselected.delete();
+		competsTable.getItems().remove(competselected);
+		
+	}
+	
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
@@ -80,8 +94,13 @@ public class MenuCompetController implements Initializable {
 		Inscriptions inscriptions =  Inscriptions.getInscriptions();
 		ObservableList<Competition>compets = FXCollections.observableArrayList(inscriptions.getCompetitions());
 		listview.setItems(compets);
-		
 		if(arg0.getFile().endsWith("GestionCompets.fxml")){
+		initializeCompetTable(compets);
+		}
+	
+	}
+
+	private void initializeCompetTable(ObservableList<Competition> compets) {
 		// Initialise chaque ligne de la table view
 		// on devrait utiliser les java properties mais je ne veux pas modifier le modele dans le package inscription 
 			nomcompet.setCellValueFactory(cellData -> new ReadOnlyStringWrapper(cellData.getValue().getNom())); 
@@ -99,9 +118,6 @@ public class MenuCompetController implements Initializable {
 			          .withLocale(Locale.FRENCH))));
 			//association de la table view aux compets
 			competsTable.setItems(compets);
-		}
-
-	
 	}
 	
 	@FXML

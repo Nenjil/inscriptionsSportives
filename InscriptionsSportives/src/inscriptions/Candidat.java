@@ -39,7 +39,7 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 		this.inscriptions = inscriptions;	
 		this.nom = nom;
 		competitions = new TreeSet<>();
-		if(Inscriptions.HIBERNATE)
+		if(Inscriptions.HIBERNATE && !Inscriptions.LOADING)
 			Passerelle.save(this);
 	}
 	//constructeur sans parametres qui fetch la derniere insctance d'inscription pour hibernate

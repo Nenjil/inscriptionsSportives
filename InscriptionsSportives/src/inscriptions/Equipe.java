@@ -40,7 +40,7 @@ public class Equipe extends Candidat
 	Equipe(Inscriptions inscriptions, String nom)
 	{
 		super(inscriptions, nom);
-		if(Inscriptions.HIBERNATE)
+		if(Inscriptions.HIBERNATE && !Inscriptions.LOADING)
 			Passerelle.save(this);
 	}
 	

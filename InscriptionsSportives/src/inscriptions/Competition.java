@@ -49,7 +49,7 @@ public class Competition implements Comparable<Competition>, Serializable
 		this.nom = nom;
 		this.dateCloture = dateCloture;
 		candidats = new TreeSet<>();
-		if(Inscriptions.HIBERNATE)
+		if(Inscriptions.HIBERNATE && !Inscriptions.LOADING)
 			Passerelle.save(this);
 	}
 	

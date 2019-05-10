@@ -91,10 +91,13 @@ public abstract class Passerelle
 	 }
 	 
 	 
-	public static Inscriptions getInscriptionsFromBdd(Inscriptions inscription) {		
+	public static Inscriptions getInscriptionsFromBdd(Inscriptions inscription) {	
+		Inscriptions.LOADING =true;
 		setPersonneFromBdd(inscription);
 		setEquipesFromBdd(inscription);
 		setCompetitionsFromBdd(inscription);
+		Inscriptions.LOADING =false;
+		
 	
 		return inscription; 
 	 }
