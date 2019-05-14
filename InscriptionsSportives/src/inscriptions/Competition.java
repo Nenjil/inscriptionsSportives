@@ -37,8 +37,9 @@ public class Competition implements Comparable<Competition>, Serializable
 	
 	// Constructeur sans paramètres pour hibernate
 	@SuppressWarnings("unused")
-	private Competition() {
-		//inscriptions=Inscriptions.getInscriptions();
+	Competition() {
+		inscriptions=Inscriptions.getInscriptions();
+		
 	}
 
 	//Constructeur normal
@@ -51,6 +52,8 @@ public class Competition implements Comparable<Competition>, Serializable
 		candidats = new TreeSet<>();
 		if(Inscriptions.HIBERNATE && !Inscriptions.LOADING)
 			Passerelle.save(this);
+		
+		//System.out.println("compet construct param : "+this);
 	}
 	
 	// getter et setter private pour hibernate

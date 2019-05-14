@@ -47,7 +47,7 @@ public class Equipe extends Candidat
 	//Constructeur normal
 	@SuppressWarnings("unused")
 	private Equipe() {
-		//inscriptions= Inscriptions.getInscriptions();
+		inscriptions= Inscriptions.getInscriptions();
 	}
 	
 	/**

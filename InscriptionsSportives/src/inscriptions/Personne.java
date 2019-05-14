@@ -32,8 +32,8 @@ public class Personne extends Candidat
 	 
 	// Constructeur sans paramètre pour hibernate
 	@SuppressWarnings("unused")
-	private Personne() {
-		//inscriptions= Inscriptions.getInscriptions();	
+	Personne() {
+		inscriptions= Inscriptions.getInscriptions();	
 	}
 	
 	//Constructeur normal

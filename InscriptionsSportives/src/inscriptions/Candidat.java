@@ -44,7 +44,7 @@ public abstract class Candidat implements Comparable<Candidat>, Serializable
 	}
 	//constructeur sans parametres qui fetch la derniere insctance d'inscription pour hibernate
 	Candidat() {
-		//inscriptions = Inscriptions.getInscriptions();
+		inscriptions = Inscriptions.getInscriptions();
 	}
 	
 	@SuppressWarnings("unused")

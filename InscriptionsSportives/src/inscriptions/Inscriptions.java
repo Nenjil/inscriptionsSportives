@@ -8,6 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Collections;
+import java.util.List;
 import java.time.LocalDate;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -43,6 +44,13 @@ public class Inscriptions implements Serializable
 	
 	public SortedSet<Competition> getCompetitions()
 	{
+		if(HIBERNATE /*&& this.competitions.isEmpty()*/) 
+		{
+			List<Competition>compets=Passerelle.getData("Competition");
+			for (Competition compet : compets) {
+				competitions.add(compet);
+			}
+		}
 		return Collections.unmodifiableSortedSet(competitions);
 	}
 	
@@ -53,6 +61,13 @@ public class Inscriptions implements Serializable
 	
 	public SortedSet<Candidat> getCandidats()
 	{
+		if(HIBERNATE /* && this.candidats.isEmpty()*/) 
+		{
+			List<Candidat>cands=Passerelle.getData("Candidat");
+			for (Candidat candidat : cands) {
+				candidats.add(candidat);
+			}
+		}
 		return Collections.unmodifiableSortedSet(candidats);
 	}
 
@@ -98,7 +113,6 @@ public class Inscriptions implements Serializable
 	{
 		Competition competition = new Competition(this, nom, dateCloture, enEquipe);
 		competitions.add(competition);
-		//Passerelle.save(competition);
 		return competition;
 	}
 
@@ -174,13 +188,14 @@ public class Inscriptions implements Serializable
 	
 	public static Inscriptions getInscriptionsFromBdd()
 	{
-		if(inscriptions==null)
+		LOADING=true;
+		if(inscriptions==null )
 		{
+			inscriptions = new Inscriptions();	
 			Passerelle.initHibernate();
-			inscriptions = new Inscriptions();
-			Passerelle.getInscriptionsFromBdd(inscriptions);
 			
 		}
+		LOADING=false;
 		return inscriptions;
 	}
 
@@ -274,9 +289,10 @@ public class Inscriptions implements Serializable
 	public static void main(String[] args)
 	{
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
+		/*
+	    Competition flechettes = inscriptions.createCompetition("Mondial de fléchettes",LocalDate.parse("2019-12-18"), false);
 		
-		Competition flechettes = inscriptions.createCompetition("Mondial de fléchettes",LocalDate.parse("2019-12-18"), false);
-		Personne tony = inscriptions.createPersonne("Tony", "Dent de plomb", "azerty"), 
+	    Personne tony = inscriptions.createPersonne("Tony", "Dent de plomb", "azerty"), 
 		boris = inscriptions.createPersonne("Boris", "le Hachoir", "ytreza");
 		flechettes.add(tony);
 		flechettes.setNom("Mondial modifié");
@@ -288,7 +304,7 @@ public class Inscriptions implements Serializable
 		lesManouches.remove(boris);
 		lesManouches.remove(tony);
 		lesManouches.delete();
-		
+		*/
 		System.out.println(inscriptions);
 		
 		if(!Inscriptions.HIBERNATE) {

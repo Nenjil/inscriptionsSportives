@@ -1,6 +1,7 @@
 package Passerelle;
 
 import java.util.List;
+import java.util.Map.Entry;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -8,8 +9,10 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 
 import org.hibernate.HibernateException;
+import org.hibernate.engine.spi.EntityEntry;
+import org.hibernate.engine.spi.SessionImplementor;
+import org.hibernate.mapping.Map;
 
-import inscriptions.Candidat;
 import inscriptions.Competition;
 import inscriptions.Equipe;
 import inscriptions.Inscriptions;
@@ -22,7 +25,6 @@ public abstract class Passerelle
 	
 	 public static void initHibernate()
 	 {
-		 
 	  try
 	  {
 		emf = Persistence.createEntityManagerFactory("Unit_Inscription");
@@ -55,7 +57,7 @@ public abstract class Passerelle
 	
 	 public static void delete(Object o)
 	 {
-		 System.out.println(o);
+		// System.out.println(o);
 	  EntityTransaction transaction = em.getTransaction();
 	  transaction.begin();
 	  em.remove(em.contains(o) ? o : em.merge(o));
@@ -90,7 +92,7 @@ public abstract class Passerelle
 		 return result.get(0);
 	 }
 	 
-	 
+	/* 
 	public static Inscriptions getInscriptionsFromBdd(Inscriptions inscription) {	
 		Inscriptions.LOADING =true;
 		setPersonneFromBdd(inscription);
@@ -105,9 +107,7 @@ public abstract class Passerelle
 	private static Inscriptions setPersonneFromBdd(Inscriptions inscription) {
 		@SuppressWarnings("unchecked")
 		List<Personne> personnes =  em.createQuery("from Personne").getResultList();
-		for (Personne personne : personnes) {
-			inscription.createPersonne(personne.getNom(), personne.getPrenom(), personne.getMail());	
-		}
+	
 		return inscription;
 	}
 	
@@ -115,13 +115,7 @@ public abstract class Passerelle
 		
 		@SuppressWarnings("unchecked")
 		List<Equipe> equipes =  em.createQuery("from Equipe").getResultList();
-		for (Equipe equipe : equipes) {
-			if(!inscription.getCandidats().contains(equipe)) {
-				@SuppressWarnings("unused")
-				Equipe team = inscription.createEquipe(equipe.getNom());
-				
-			}
-		}
+	
 		return inscription;
 	}
 
@@ -129,12 +123,9 @@ public abstract class Passerelle
 		@SuppressWarnings("unchecked")
 		List<Competition>compets = em.createQuery("from Competition").getResultList();
 		for (Competition compet : compets) {
-			if(!inscription.getCompetitions().contains(compet)) {
-				Competition compete =inscription.createCompetition(compet.getNom(),compet.getDateCloture(),compet.estEnEquipe());
-
-			}
+			inscription.createCompetition(compet.getNom(), compet.getDateCloture(), compet.estEnEquipe());
 		}
 
 		return inscription;
-	}
+	}*/
 }
