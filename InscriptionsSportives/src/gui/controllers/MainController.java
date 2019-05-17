@@ -16,6 +16,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
 public class MainController implements Initializable {
@@ -53,10 +55,16 @@ public class MainController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
-
-		
 	}
 	
+	protected static void triggerNoSelectionAlert() {
+		Alert alert = new Alert(AlertType.ERROR);
+		alert.initOwner(null);
+		alert.setTitle("Pas de selection");
+		alert.setHeaderText("Aucun élément selectionné");
+		alert.setContentText("Veuillez dabord selectionner un élément.");
+		alert.showAndWait();
+	}
 	
 
 }

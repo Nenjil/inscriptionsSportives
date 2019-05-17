@@ -290,7 +290,7 @@ public class Inscriptions implements Serializable
 	{
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
 		/*
-	    Competition flechettes = inscriptions.createCompetition("Mondial de fléchettes",LocalDate.parse("2019-12-18"), false);
+	    Competition flechettes = inscriptions.createCompetition("Mondial de fléchettes",LocalDate.parse("2019-12-19"), false);
 		
 	    Personne tony = inscriptions.createPersonne("Tony", "Dent de plomb", "azerty"), 
 		boris = inscriptions.createPersonne("Boris", "le Hachoir", "ytreza");

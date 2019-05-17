@@ -26,10 +26,10 @@
       </SplitPane>
       <VBox alignment="BOTTOM_CENTER" layoutX="350.0" layoutY="96.0" prefHeight="200.0" prefWidth="249.0" spacing="15.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="26.0"  onAction="#handleDeleteCompet" prefWidth="150.0" text="Supprimer la competition" />
-          <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" text="Modifier la competition" />
+            <Button mnemonicParsing="false" prefHeight="26.0"  fx:id="DeleteButton"  onAction="#handleDeleteCompet" prefWidth="150.0" text="Supprimer la competition" />
+          <Button mnemonicParsing="false" prefHeight="26.0"  onAction="#handleEditCompet" prefWidth="150.0" text="Modifier la competition" />
             <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" text="Ajouter un candidat" />
-            <Button mnemonicParsing="false" prefHeight="26.0"  prefWidth="150.0" text="supprimer un candidat" />
+            <Button mnemonicParsing="false" prefHeight="26.0"   prefWidth="150.0" text="supprimer un candidat" />
             <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" text="Voir candidats">
                <VBox.margin>
                   <Insets bottom="15.0" />
