@@ -206,7 +206,7 @@ public class MenuCompetController implements Initializable {
 	        Scene scene = new Scene(dialogPage);
 	        dialogStage.setScene(scene);
 	        // initialisation de la compet en recuperant le controller
-	        EditCompetController controller = loader.getController();
+	        EditOrCreateCompetController controller = loader.getController();
 	        //cela servira pour close la fenetre
 	        controller.setDialogStage(dialogStage); 
 	        controller.loadCompet(compet);
