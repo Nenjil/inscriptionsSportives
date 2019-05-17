@@ -1,4 +1,4 @@
-package gui.controllers;
+package gui.controllers.personne;
 
 import java.io.IOException;
 import java.net.URL;
@@ -31,7 +31,7 @@ public class MenuPersonneController implements Initializable {
 	@FXML
 	public void backtoMainMenu(ActionEvent e) throws IOException {
 		//chargement de la scene precedente
-	    Parent parent = FXMLLoader.load(getClass().getResource("../fxml/"+previouslocation));
+	    Parent parent = FXMLLoader.load(getClass().getResource("../../fxml/"+previouslocation));
 	    //creation d'une nouvelle scene basée sur le fxml 
 	  //  System.out.println(getClass().getResource());
         Scene scene = new Scene(parent);
@@ -43,7 +43,7 @@ public class MenuPersonneController implements Initializable {
 	
 	@FXML
 	public void getVoirPersonnes(ActionEvent e) throws IOException {
-		  Parent parent = FXMLLoader.load(getClass().getResource("../fxml/VoirPersonnes.fxml"));
+		  Parent parent = FXMLLoader.load(getClass().getResource("../../fxml/VoirPersonnes.fxml"));
 	      Scene scene = new Scene(parent);
 		  Stage primaryStage = (Stage) ((Node)e.getSource()).getScene().getWindow() ; 
 		  primaryStage.setScene(scene);

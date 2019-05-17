@@ -1,4 +1,4 @@
-package gui.controllers;
+package gui.controllers.equipe;
 
 import java.io.IOException;
 import java.net.URL;
@@ -27,7 +27,7 @@ public class MenuEquipeController implements Initializable {
 	@FXML
 	public void backtoMainMenu(ActionEvent e) throws IOException {
 		//chargement du xml lié
-	    Parent parent = FXMLLoader.load(getClass().getResource("../fxml/"+previouslocation));
+	    Parent parent = FXMLLoader.load(getClass().getResource("../../fxml/"+previouslocation));
 	    //creation d'une nouvelle scene basée sur le fxml 
         Scene scene = new Scene(parent);
         //Recuperation de la fenetre principale pour creer une nouvelle scene
@@ -37,7 +37,7 @@ public class MenuEquipeController implements Initializable {
 	
 	@FXML
 	public void getVoirEquipes(ActionEvent e) throws IOException {
-		  Parent parent = FXMLLoader.load(getClass().getResource("../fxml/VoirEquipes.fxml"));
+		  Parent parent = FXMLLoader.load(getClass().getResource("../../fxml/VoirEquipes.fxml"));
 	      Scene scene = new Scene(parent);
 		  Stage primaryStage = (Stage) ((Node)e.getSource()).getScene().getWindow() ; 
 		  primaryStage.setScene(scene);

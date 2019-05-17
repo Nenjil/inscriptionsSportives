@@ -1,4 +1,4 @@
-package gui.controllers;
+package gui.controllers.competition;
 
 import java.io.IOException;
 import java.net.URL;
@@ -10,6 +10,7 @@ import java.util.ResourceBundle;
 
 import com.sun.javafx.collections.ObservableSequentialListWrapper;
 
+import gui.controllers.MainController;
 import inscriptions.Candidat;
 import inscriptions.Competition;
 import inscriptions.Inscriptions;
@@ -59,7 +60,7 @@ public class MenuCompetController implements Initializable {
 	
 	@FXML
 	public void getVoirCompets(ActionEvent e) throws IOException {
-		  Parent parent = FXMLLoader.load(getClass().getResource("../fxml/VoirCompets.fxml"));
+		  Parent parent = FXMLLoader.load(getClass().getResource("../../fxml/VoirCompets.fxml"));
 	      Scene scene = new Scene(parent);
 		  Stage primaryStage = (Stage) ((Node)e.getSource()).getScene().getWindow() ; 
 		  primaryStage.setScene(scene);	
@@ -67,7 +68,7 @@ public class MenuCompetController implements Initializable {
 	
 	@FXML
 	public void getAjoutCompet(ActionEvent e) throws IOException {
-		  Parent parent = FXMLLoader.load(getClass().getResource("../fxml/AjoutCompet.fxml"));
+		  Parent parent = FXMLLoader.load(getClass().getResource("../../fxml/AjoutCompet.fxml"));
 	      Scene scene = new Scene(parent);
 		  Stage primaryStage = (Stage) ((Node)e.getSource()).getScene().getWindow() ; 
 		  primaryStage.setScene(scene);	
@@ -75,7 +76,7 @@ public class MenuCompetController implements Initializable {
 	
 	@FXML
 	public void getGestionCompets(ActionEvent e) throws IOException {
-		  Parent parent = FXMLLoader.load(getClass().getResource("../fxml/GestionCompets.fxml"));
+		  Parent parent = FXMLLoader.load(getClass().getResource("../../fxml/GestionCompets.fxml"));
 	      Scene scene = new Scene(parent);
 		  Stage primaryStage = (Stage) ((Node)e.getSource()).getScene().getWindow() ; 
 		  primaryStage.setScene(scene);
@@ -146,7 +147,7 @@ public class MenuCompetController implements Initializable {
 	@FXML
 	public void backtoMainMenu(ActionEvent e) throws IOException {
 		//chargement du xml lié
-	    Parent parent = FXMLLoader.load(getClass().getResource("../fxml/"+previouslocation));
+	    Parent parent = FXMLLoader.load(getClass().getResource("../../fxml/"+previouslocation));
 	    //creation d'une nouvelle scene basée sur le fxml 
         Scene scene = new Scene(parent);
         //Recuperation de la fenetre principale pour creer une nouvelle scene
@@ -195,7 +196,7 @@ public class MenuCompetController implements Initializable {
 	  
 	        // chargement du fxml de la boite de dialogue
 	        FXMLLoader loader = new FXMLLoader();
-	        loader.setLocation(getClass().getResource("../fxml/EditCompet.fxml"));
+	        loader.setLocation(getClass().getResource("../../fxml/EditCompet.fxml"));
 	        BorderPane dialogPage = (BorderPane) loader.load();
 	        // Cree la fenetre de dialogue
 	        Stage dialogStage = new Stage();  

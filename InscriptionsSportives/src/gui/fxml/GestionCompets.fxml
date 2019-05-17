@@ -8,14 +8,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.MenuCompetController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.competition.MenuCompetController">
    <children>
       <SplitPane prefHeight="300.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="0.0">
          <items>
             <TableView fx:id="competsTable" prefHeight="398.0" prefWidth="354.0">
               <columns>
-                <TableColumn fx:id="nomcompet" prefWidth="150.0" text="nom compÃ©tition" />
-                <TableColumn fx:id="enequipe" minWidth="5.0" prefWidth="35.20752716064453" text="en Ã©quipe ?" />
+                <TableColumn fx:id="nomcompet" prefWidth="150.0" text="nom competition" />
+                <TableColumn fx:id="enequipe" minWidth="5.0" prefWidth="35.20752716064453" text="en equipe ?" />
                 <TableColumn fx:id="datecloture" prefWidth="168.45285034179688" text="date cloture" />
               </columns>
                <columnResizePolicy>
@@ -26,10 +26,10 @@
       </SplitPane>
       <VBox alignment="BOTTOM_CENTER" layoutX="350.0" layoutY="96.0" prefHeight="200.0" prefWidth="249.0" spacing="15.0">
          <children>
-            <Button mnemonicParsing="false" prefHeight="26.0"  fx:id="DeleteButton"  onAction="#handleDeleteCompet" prefWidth="150.0" text="Supprimer la competition" />
-          <Button mnemonicParsing="false" prefHeight="26.0"  onAction="#handleEditCompet" prefWidth="150.0" text="Modifier la competition" />
+            <Button fx:id="DeleteButton" mnemonicParsing="false" onAction="#handleDeleteCompet" prefHeight="26.0" prefWidth="150.0" text="Supprimer la competition" />
+          <Button mnemonicParsing="false" onAction="#handleEditCompet" prefHeight="26.0" prefWidth="150.0" text="Modifier la competition" />
             <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" text="Ajouter un candidat" />
-            <Button mnemonicParsing="false" prefHeight="26.0"   prefWidth="150.0" text="supprimer un candidat" />
+            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" text="supprimer un candidat" />
             <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" text="Voir candidats">
                <VBox.margin>
                   <Insets bottom="15.0" />

@@ -1,4 +1,4 @@
-package gui.controllers;
+package gui.controllers.competition;
 
 import java.net.URL;
 import java.util.ResourceBundle;

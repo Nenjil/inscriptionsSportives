@@ -57,7 +57,7 @@ public class MainController implements Initializable {
 		Inscriptions inscriptions = Inscriptions.getInscriptions();
 	}
 	
-	protected static void triggerNoSelectionAlert() {
+	public static void triggerNoSelectionAlert() {
 		Alert alert = new Alert(AlertType.ERROR);
 		alert.initOwner(null);
 		alert.setTitle("Pas de selection");
