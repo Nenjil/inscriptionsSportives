@@ -179,19 +179,83 @@ public class MenuCompetController implements Initializable {
 		}
 		
 		//Ajout un candidat dans la compet
-				@FXML
-				public void handleAddCandidatCompet(ActionEvent e) throws IOException {
-					
-					Competition competselected= competsTable.getSelectionModel().getSelectedItem() ;
-					if(competselected !=null) {
-						// TODO 
-					}
-					else {
-					       MainController.triggerNoSelectionAlert();
-						}
+		@FXML
+		public void handleAddCandidatCompet(ActionEvent e) throws IOException {
+			
+			Competition competselected= competsTable.getSelectionModel().getSelectedItem() ;
+			if(competselected !=null) {
+				// methode qui ouvre une fenetre avec la liste des candidats a ajouter
+				showCompetCandidatDialog(competselected,"AjoutCandidat");
+			}
+			else {
+			       MainController.triggerNoSelectionAlert();
 				}
+		}
+		
+		//Supprime un ou plusieurs candidats dans la compet
+		@FXML
+		public void handleDeleteCandidatCompet(ActionEvent e) throws IOException {
+			
+			Competition competselected= competsTable.getSelectionModel().getSelectedItem() ;
+			if(competselected !=null) {
+				// methode qui ouvre une fenetre avec la liste des candidats a ajouter
+				showCompetCandidatDialog(competselected,"DeleteCandidat");
+			}
+			else {
+			       MainController.triggerNoSelectionAlert();
+				}
+		}
+		
+		//Supprime un ou plusieurs candidats dans la compet
+		@FXML
+		public void handleVoirCandidatCompet(ActionEvent e) throws IOException {
+			
+			Competition competselected= competsTable.getSelectionModel().getSelectedItem() ;
+			if(competselected !=null) {
+				// methode qui ouvre une fenetre avec la liste des candidats a ajouter
+				showVoirCandidatDialog(competselected);
+			}
+			else {
+			       MainController.triggerNoSelectionAlert();
+				}
+		}
 	
-	public void showCompetEditDialog(Competition compet) {
+
+	private void showVoirCandidatDialog(Competition compet) {
+			
+			// todo
+		}
+
+	private void showCompetCandidatDialog(Competition compet,String mode) throws IOException {
+		//chargement du fmxl
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("../../fxml/"+mode+".fxml"));
+		BorderPane dialogPage = (BorderPane) loader.load();
+		//creation dune fenetre avec une scene 
+		Stage dialogStage = new Stage();
+		Scene scene = new Scene(dialogPage);
+		dialogStage.setScene(scene);
+		// initialisation de la compet en recuperant le controller
+	
+		if(mode.equals("AjoutCandidat")) {
+			AjoutCandidatsController controller = loader.getController();
+		     //cela servira pour close la fenetre
+	        controller.setDialogStage(dialogStage);
+	        //rempli la liste view des candidats pour cette compet
+	        controller.setListCandidats(compet);
+		}
+		else
+		{
+			DeleteCandidatsController controller = loader.getController();
+	        controller.setDialogStage(dialogStage);
+	        controller.setListCandidats(compet);
+		}
+   	
+        // affiche la boite de dialogue
+        dialogStage.showAndWait();
+		}
+
+	private void showCompetEditDialog(Competition compet) {
 	    try {
 	  
 	        // chargement du fxml de la boite de dialogue
@@ -210,10 +274,8 @@ public class MenuCompetController implements Initializable {
 	        //cela servira pour close la fenetre
 	        controller.setDialogStage(dialogStage); 
 	        controller.loadCompet(compet);
-
 	        // affiche la boite de dialogue
 	        dialogStage.showAndWait();
-	        
 
 	    } catch (IOException e) {
 	        e.printStackTrace();
