@@ -150,7 +150,6 @@ public class MenuCompetController implements Initializable {
 			this.previouslocation="competition/MenuCompet.fxml";
 		else
 			this.previouslocation="main.fxml";
-		
 	}
 	
 	//Modifie une compet de l'application
@@ -167,7 +166,6 @@ public class MenuCompetController implements Initializable {
 			       MainController.triggerNoSelectionAlert();
 				}
 		}
-		
 		//Ajout un candidat dans la compet
 		@FXML
 		public void handleAddCandidatCompet(ActionEvent e) throws IOException {
@@ -210,7 +208,6 @@ public class MenuCompetController implements Initializable {
 				}
 		}
 	
-
 	private void showVoirCandidatDialog(Competition compet) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("../../fxml/competition/VoirCandidats.fxml"));
@@ -271,7 +268,4 @@ public class MenuCompetController implements Initializable {
 	        // affiche la boite de dialogue
 	        dialogStage.showAndWait();
 	}
-	
-	
-
 }

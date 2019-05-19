@@ -32,7 +32,7 @@ public class MainController implements Initializable {
 	
 	@FXML
 	public void getEquipeMenu(ActionEvent e) throws IOException {
-	    Parent parent = FXMLLoader.load(getClass().getResource("../fxml/MenuEquipe.fxml"));
+	    Parent parent = FXMLLoader.load(getClass().getResource("../fxml/equipe/MenuEquipe.fxml"));
         Scene scene = new Scene(parent);
 		Stage primaryStage = (Stage) ((Node)e.getSource()).getScene().getWindow() ; 
 		primaryStage.setScene(scene);
@@ -40,7 +40,7 @@ public class MainController implements Initializable {
 	
 	@FXML
 	public void getPersonneMenu(ActionEvent e) throws IOException {
-	    Parent parent = FXMLLoader.load(getClass().getResource("../fxml/MenuPersonne.fxml"));
+	    Parent parent = FXMLLoader.load(getClass().getResource("../fxml/personne/MenuPersonne.fxml"));
         Scene scene = new Scene(parent);
 		Stage primaryStage = (Stage) ((Node)e.getSource()).getScene().getWindow() ; 
 		primaryStage.setScene(scene);

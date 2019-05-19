@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.personne.MenuPersonneController">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.equipe.MenuEquipeController">
    <top>
-      <Label alignment="CENTER" prefHeight="56.0" prefWidth="600.0" stylesheets="@../css/main.css" text="Menu Personne" BorderPane.alignment="CENTER">
+      <Label alignment="CENTER" prefHeight="56.0" prefWidth="600.0" stylesheets="@../../css/main.css" text="Menu Equipe" BorderPane.alignment="CENTER">
          <font>
             <Font name="Amiri Quran" size="25.0" />
          </font>
@@ -28,9 +28,9 @@
    <right>
       <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="140.0" prefWidth="600.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Ajouter une personne" />
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Gerer les personnes" />
-            <Button alignment="CENTER" contentDisplay="CENTER" onAction="#getVoirPersonnes" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Voir les personnes" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction ="#getAjoutEquipe" prefHeight="30.0" prefWidth="150.0" text="Ajouter une équipe" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#getGestionEquipes" prefHeight="30.0" prefWidth="150.0" text="Gerer les équipes" />
+            <Button alignment="CENTER" contentDisplay="CENTER" onAction= "#getVoirEquipes" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Voir les équipes" />
          </children>
          <BorderPane.margin>
             <Insets bottom="50.0" />

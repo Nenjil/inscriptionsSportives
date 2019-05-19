@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.controllers.equipe.MenuEquipeController">
+   <children>
+      <SplitPane prefHeight="300.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="0.0">
+         <items>
+            <TableView fx:id="equipesTable" prefHeight="398.0" prefWidth="354.0">
+              <columns>
+                <TableColumn fx:id="nomequipe" prefWidth="150.0" text="nom equipe" />
+              </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+         </items>
+      </SplitPane>
+      <VBox alignment="BOTTOM_CENTER" layoutX="350.0" layoutY="96.0" prefHeight="200.0" prefWidth="249.0" spacing="15.0">
+         <children>
+            <Button fx:id="DeleteButton" mnemonicParsing="false" onAction="#handleDeleteEquipe"  prefHeight="26.0" prefWidth="150.0" text="Supprimer l'equipe" />
+          <Button mnemonicParsing="false"  onAction="#handleEditEquipe" prefHeight="26.0" prefWidth="150.0" text="Modifier l'equipe" />
+            <Button mnemonicParsing="false"  onAction="#handleAddMembreEquipe" prefHeight="26.0" prefWidth="150.0" text="Ajouter un membre" />
+            <Button mnemonicParsing="false" prefHeight="26.0" onAction="#handleDeleteMembreEquipe" prefWidth="150.0" text="supprimer un membre" />
+            <Button mnemonicParsing="false" prefHeight="26.0" onAction ="#handleVoirMembreEquipe" prefWidth="150.0" text="Voir les membres">
+               <VBox.margin>
+                  <Insets bottom="15.0" />
+               </VBox.margin>
+            </Button>
+         </children>
+      </VBox>
+      <Button layoutX="475.0" layoutY="359.0" mnemonicParsing="false" onAction="#backtoMainMenu" prefHeight="26.0" prefWidth="72.0" text="Retour" />
+   </children>
+</AnchorPane>
