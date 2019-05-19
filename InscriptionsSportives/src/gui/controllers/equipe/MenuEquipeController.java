@@ -5,6 +5,9 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import inscriptions.Equipe;
+import inscriptions.Inscriptions;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -47,9 +50,9 @@ public class MenuEquipeController implements Initializable {
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-		/*	Inscriptions inscriptions =  Inscriptions.getInscriptions();
+		Inscriptions inscriptions =  Inscriptions.getInscriptions();
 		ObservableList<Equipe>equipes = FXCollections.observableArrayList(inscriptions.getEquipes());
-		listview.setItems(equipes);*/
+		listview.setItems(equipes);
 		
 		this.setPreviousLocation(arg0.getFile());
 	}

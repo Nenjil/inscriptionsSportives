@@ -30,7 +30,7 @@
           <Button mnemonicParsing="false" onAction="#handleEditCompet" prefHeight="26.0" prefWidth="150.0" text="Modifier la competition" />
             <Button mnemonicParsing="false"  onAction="#handleAddCandidatCompet" prefHeight="26.0" prefWidth="150.0" text="Ajouter un candidat" />
             <Button mnemonicParsing="false" prefHeight="26.0" onAction="#handleDeleteCandidatCompet" prefWidth="150.0" text="supprimer un candidat" />
-            <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" text="Voir candidats">
+            <Button mnemonicParsing="false" prefHeight="26.0" onAction ="#handleVoirCandidatCompet" prefWidth="150.0" text="Voir candidats">
                <VBox.margin>
                   <Insets bottom="15.0" />
                </VBox.margin>

@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import inscriptions.Competition;
 import inscriptions.Inscriptions;
 import inscriptions.Personne;
 import javafx.collections.FXCollections;
@@ -53,9 +52,9 @@ public class MenuPersonneController implements Initializable {
 	
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-	/*	Inscriptions inscriptions =  Inscriptions.getInscriptions();
+		Inscriptions inscriptions =  Inscriptions.getInscriptions();
 		ObservableList<Personne>personnes = FXCollections.observableArrayList(inscriptions.getPersonnes());
-		listview.setItems(personnes);*/
+		listview.setItems(personnes);
 		this.setPreviousLocation(arg0.getFile());
 
 	}

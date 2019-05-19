@@ -16,6 +16,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
@@ -32,6 +33,8 @@ public class EditOrCreateCompetController implements Initializable {
 	DatePicker dateCloture; 
 	@FXML
 	TextField sucess;
+	@FXML
+	Button BtnValider;
 	
 	private Stage dialogStage;
 	private Competition compet;
@@ -67,7 +70,6 @@ public class EditOrCreateCompetController implements Initializable {
         	compet.setNom(nomCompet.getText());
         	compet.setDateCloture(dateCloture.getValue());
         	sucess.setVisible(true);
-        	Thread.sleep(2500); 
             dialogStage.close();
         }
     }
@@ -88,8 +90,10 @@ public class EditOrCreateCompetController implements Initializable {
         	estEnEquipe = true; 
         else 
         	estEnEquipe= false;
+      
         Inscriptions.getInscriptions().createCompetition(nomCompet.getText(), dateCloture.getValue(), estEnEquipe);
         sucess.setVisible(true);
+        BtnValider.setVisible(false);
         
         }
     }
@@ -136,7 +140,7 @@ public class EditOrCreateCompetController implements Initializable {
 	@FXML
 	public void backtoMainMenu(ActionEvent e) throws IOException {
 		//chargement du xml lié
-	    Parent parent = FXMLLoader.load(getClass().getResource("../../fxml/MenuCompet.fxml"));
+	    Parent parent = FXMLLoader.load(getClass().getResource("../../fxml/competition/MenuCompet.fxml"));
 	    //creation d'une nouvelle scene basée sur le fxml 
         Scene scene = new Scene(parent);
         //Recuperation de la fenetre principale pour creer une nouvelle scene

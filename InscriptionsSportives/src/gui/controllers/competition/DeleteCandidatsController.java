@@ -2,33 +2,23 @@ package gui.controllers.competition;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
-
 import gui.controllers.MainController;
 import inscriptions.Candidat;
 import inscriptions.Competition;
-import inscriptions.Equipe;
-import inscriptions.Personne;
-import inscriptions.Inscriptions;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
 public class DeleteCandidatsController implements Initializable {
@@ -53,7 +43,6 @@ public class DeleteCandidatsController implements Initializable {
     
     	//autorise le choix de plusieurs candidats simultanément
     	LV_candidats.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
-		
 		LV_candidats.setItems(candidats);
     }
 
@@ -65,7 +54,6 @@ public class DeleteCandidatsController implements Initializable {
     
     @FXML 
     public void handleDeleteCandidats(ActionEvent e) throws IOException {
-    	
     	List<Candidat> candis =LV_candidats.getSelectionModel().getSelectedItems();
     	
     	if(candis.isEmpty()) {
@@ -73,12 +61,21 @@ public class DeleteCandidatsController implements Initializable {
     	}
     	else
     	{
-    		for (Candidat candidat : candis) {
-    			compet.remove(candidat);
-				sucess.setVisible(true);
-				sucess.setText(sucess.getText()+ "("+candidat.getNom()+")");
-				
+    		Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setTitle("Attention action irréversible");
+			alert.setContentText("Etes vous sure de vouloir supprimer les candidats selectionnés ? ");
+			Optional<ButtonType> result = alert.showAndWait();
+			if (result.get() == ButtonType.OK){
+				for (Candidat candidat : candis) {
+	    			compet.remove(candidat);
+					sucess.setVisible(true);
+					sucess.setText(sucess.getText()+ "("+candidat.getNom()+")");
+				}
+			} 
+			else {
+			    alert.close();
 			}
+    	
     		// on reinitialise la liste
     		setListCandidats(compet);
     	}

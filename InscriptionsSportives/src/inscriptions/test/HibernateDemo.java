@@ -1,12 +1,10 @@
 package inscriptions.test;
 
-import java.time.LocalDate;
 import java.util.List;
 
 import javax.persistence.*;
 
 import inscriptions.Competition;
-import inscriptions.Inscriptions;
 
 public class HibernateDemo {
 	

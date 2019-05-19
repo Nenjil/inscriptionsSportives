@@ -2,24 +2,17 @@ package gui.controllers.competition;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 import java.util.Locale;
 import java.util.ResourceBundle;
-
-import com.sun.javafx.collections.ObservableSequentialListWrapper;
-
 import gui.controllers.MainController;
 import inscriptions.Candidat;
 import inscriptions.Competition;
 import inscriptions.Inscriptions;
-import javafx.beans.property.ReadOnlyBooleanWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.collections.ObservableSet;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,15 +20,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class MenuCompetController implements Initializable {
@@ -55,12 +44,11 @@ public class MenuCompetController implements Initializable {
 	//Pour desactive le bouton quand rien n'est selectionné
 	@FXML 
 	Button DeleteButton = new Button() ; 
-	
 	private String previouslocation="";
 	
 	@FXML
 	public void getVoirCompets(ActionEvent e) throws IOException {
-		  Parent parent = FXMLLoader.load(getClass().getResource("../../fxml/VoirCompets.fxml"));
+		  Parent parent = FXMLLoader.load(getClass().getResource("../../fxml/competition/VoirCompets.fxml"));
 	      Scene scene = new Scene(parent);
 		  Stage primaryStage = (Stage) ((Node)e.getSource()).getScene().getWindow() ; 
 		  primaryStage.setScene(scene);	
@@ -68,7 +56,7 @@ public class MenuCompetController implements Initializable {
 	
 	@FXML
 	public void getAjoutCompet(ActionEvent e) throws IOException {
-		  Parent parent = FXMLLoader.load(getClass().getResource("../../fxml/AjoutCompet.fxml"));
+		  Parent parent = FXMLLoader.load(getClass().getResource("../../fxml/competition/AjoutCompet.fxml"));
 	      Scene scene = new Scene(parent);
 		  Stage primaryStage = (Stage) ((Node)e.getSource()).getScene().getWindow() ; 
 		  primaryStage.setScene(scene);	
@@ -76,7 +64,7 @@ public class MenuCompetController implements Initializable {
 	
 	@FXML
 	public void getGestionCompets(ActionEvent e) throws IOException {
-		  Parent parent = FXMLLoader.load(getClass().getResource("../../fxml/GestionCompets.fxml"));
+		  Parent parent = FXMLLoader.load(getClass().getResource("../../fxml/competition/GestionCompets.fxml"));
 	      Scene scene = new Scene(parent);
 		  Stage primaryStage = (Stage) ((Node)e.getSource()).getScene().getWindow() ; 
 		  primaryStage.setScene(scene);
@@ -100,6 +88,8 @@ public class MenuCompetController implements Initializable {
 		else {
 	       MainController.triggerNoSelectionAlert();
 		}
+		//refresh la table
+		this.getGestionCompets(e);
 		
 	}
 	
@@ -157,7 +147,7 @@ public class MenuCompetController implements Initializable {
 
 	private void setPreviousLocation(String file) {
 		if(file.endsWith("VoirCompets.fxml") || file.endsWith("AjoutCompet.fxml") || file.endsWith("GestionCompets.fxml"))
-			this.previouslocation="MenuCompet.fxml";
+			this.previouslocation="competition/MenuCompet.fxml";
 		else
 			this.previouslocation="main.fxml";
 		
@@ -170,7 +160,7 @@ public class MenuCompetController implements Initializable {
 			Competition competselected= competsTable.getSelectionModel().getSelectedItem() ;
 			if(competselected !=null) {
 				showCompetEditDialog(competselected);
-				this.previouslocation="GestionCompets.fxml";
+				this.previouslocation="competition/GestionCompets.fxml";
 				this.backtoMainMenu(e);
 			}
 			else {
@@ -195,7 +185,7 @@ public class MenuCompetController implements Initializable {
 		//Supprime un ou plusieurs candidats dans la compet
 		@FXML
 		public void handleDeleteCandidatCompet(ActionEvent e) throws IOException {
-			
+		
 			Competition competselected= competsTable.getSelectionModel().getSelectedItem() ;
 			if(competselected !=null) {
 				// methode qui ouvre une fenetre avec la liste des candidats a ajouter
@@ -221,15 +211,23 @@ public class MenuCompetController implements Initializable {
 		}
 	
 
-	private void showVoirCandidatDialog(Competition compet) {
-			
-			// todo
+	private void showVoirCandidatDialog(Competition compet) throws IOException {
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("../../fxml/competition/VoirCandidats.fxml"));
+        BorderPane dialogPage = (BorderPane) loader.load();
+        Stage dialogStage = new Stage();  
+        Scene scene = new Scene(dialogPage);
+        dialogStage.setScene(scene);
+        VoirCandidatsController controller = loader.getController();
+        controller.setDialogStage(dialogStage); 
+        controller.setListCandidats(compet);
+        dialogStage.showAndWait();
 		}
 
 	private void showCompetCandidatDialog(Competition compet,String mode) throws IOException {
 		//chargement du fmxl
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("../../fxml/"+mode+".fxml"));
+		loader.setLocation(getClass().getResource("../../fxml/competition/"+mode+".fxml"));
 		BorderPane dialogPage = (BorderPane) loader.load();
 		//creation dune fenetre avec une scene 
 		Stage dialogStage = new Stage();
@@ -255,18 +253,14 @@ public class MenuCompetController implements Initializable {
         dialogStage.showAndWait();
 		}
 
-	private void showCompetEditDialog(Competition compet) {
-	    try {
-	  
+	private void showCompetEditDialog(Competition compet) throws IOException {
 	        // chargement du fxml de la boite de dialogue
 	        FXMLLoader loader = new FXMLLoader();
-	        loader.setLocation(getClass().getResource("../../fxml/EditCompet.fxml"));
+	        loader.setLocation(getClass().getResource("../../fxml/competition/EditCompet.fxml"));
 	        BorderPane dialogPage = (BorderPane) loader.load();
 	        // Cree la fenetre de dialogue
 	        Stage dialogStage = new Stage();  
 	        dialogStage.setTitle("Modifier une competition");
-	        dialogStage.initModality(Modality.WINDOW_MODAL);
-	        dialogStage.initOwner(null);
 	        Scene scene = new Scene(dialogPage);
 	        dialogStage.setScene(scene);
 	        // initialisation de la compet en recuperant le controller
@@ -276,10 +270,6 @@ public class MenuCompetController implements Initializable {
 	        controller.loadCompet(compet);
 	        // affiche la boite de dialogue
 	        dialogStage.showAndWait();
-
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	    }
 	}
 	
 	

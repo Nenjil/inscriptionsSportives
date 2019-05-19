@@ -1,22 +1,12 @@
 package Passerelle;
 
 import java.util.List;
-import java.util.Map.Entry;
-
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
-
 import org.hibernate.HibernateException;
-import org.hibernate.engine.spi.EntityEntry;
-import org.hibernate.engine.spi.SessionImplementor;
-import org.hibernate.mapping.Map;
 
-import inscriptions.Competition;
-import inscriptions.Equipe;
-import inscriptions.Inscriptions;
-import inscriptions.Personne;
 
 public abstract class Passerelle
 {
@@ -60,7 +50,7 @@ public abstract class Passerelle
 		// System.out.println(o);
 	  EntityTransaction transaction = em.getTransaction();
 	  transaction.begin();
-	  em.remove(em.contains(o) ? o : em.merge(o));
+	  em.remove(o);
 	  transaction.commit();
 	  transaction = null;
 	 // em.flush();

@@ -253,9 +253,7 @@ public class Competition implements Comparable<Competition>, Serializable
 		for (Candidat candidat : candidats)
 			remove(candidat);
 		inscriptions.delete(this);
-		if(Inscriptions.HIBERNATE)
-			
-			Passerelle.delete(this);
+	
 	}
 	
 	@Override
