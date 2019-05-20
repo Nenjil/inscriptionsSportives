@@ -1,9 +1,11 @@
-package gui.controllers.equipe;
+package gui.controllers.personne;
 
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import inscriptions.Equipe;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import inscriptions.Personne;
 import inscriptions.Inscriptions;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,17 +20,21 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-public class EditOrCreateEquipeController implements Initializable {
+public class EditOrCreatePersonneController implements Initializable {
 
 	@FXML
-	TextField nomEquipe; 
+	TextField nomPersonne; 
+	@FXML
+	TextField prenomPersonne;
+	@FXML
+	TextField mailPersonne; 
 	@FXML
 	TextField sucess;
 	@FXML
 	Button BtnValider;
 	
 	private Stage dialogStage;
-	private Equipe equipe;
+	private Personne personne;
 	private String mode ="creation" ;
 	
     public void setDialogStage(Stage dialogStage, String mode) {
@@ -41,22 +47,27 @@ public class EditOrCreateEquipeController implements Initializable {
      *
      * @param compet
      */
-    public void loadEquipe(Equipe equipe) {
-    	  this.equipe = equipe;
-          nomEquipe.setText(equipe.getNom());
+    public void loadPersonne(Personne personne) {
+    	  this.personne = personne;
+          nomPersonne.setText(personne.getNom());
+          prenomPersonne.setText(personne.getPrenom());
+          mailPersonne.setText(personne.getMail());
     }
     
     
     
     @FXML
-    private void handleCreateOrEditEquipe() throws IOException {
+    private void handleCreateOrEditPersonne() throws IOException {
         if(isInputValid()) {
         	if(mode.equals("creation")) {
-		    	Inscriptions.getInscriptions().createEquipe(nomEquipe.getText());
+		    	Inscriptions.getInscriptions().createPersonne(nomPersonne.getText(),prenomPersonne.getText(),mailPersonne.getText());
         	}
         	else
         	{
-        		equipe.setNom(nomEquipe.getText());
+        		personne.setNom(nomPersonne.getText());
+        		personne.setPrenom(prenomPersonne.getText());
+        		personne.setMail(mailPersonne.getText());
+        	
         		sucess.setText("L'equipe a bien ete modifiee");
         	}
         	sucess.setVisible(true);
@@ -71,9 +82,17 @@ public class EditOrCreateEquipeController implements Initializable {
      */
     private boolean isInputValid() {
         String error = "";
+        String regex = "^([_a-zA-Z0-9-]+(\\.[_a-zA-Z0-9-]+)*@[a-zA-Z0-9-]+(\\.[a-zA-Z0-9-]+)*(\\.[a-zA-Z]{1,6}))?$";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(mailPersonne.getText());
 
-        if(nomEquipe.getText().isEmpty())
+        if(nomPersonne.getText().isBlank() || prenomPersonne.getText().isBlank() || mailPersonne.getText().isBlank()) {
         	error="veuillez remplir tout les champs";
+        }
+           
+        else if(!matcher.matches())
+        	error ="Email non valide";
+        
        
         
         if (error.length() == 0) {
@@ -82,7 +101,7 @@ public class EditOrCreateEquipeController implements Initializable {
             // Show the error message.
             Alert alert = new Alert(AlertType.ERROR);
             alert.initOwner(dialogStage);
-            alert.setTitle("Invalid Fields");
+            alert.setTitle("Champs invalides");
             alert.setContentText(error);
             alert.showAndWait();
 
@@ -104,7 +123,7 @@ public class EditOrCreateEquipeController implements Initializable {
 		}
 		else {
 			//chargement du xml lié
-		    Parent parent = FXMLLoader.load(getClass().getResource("../../fxml/equipe/MenuEquipe.fxml"));
+		    Parent parent = FXMLLoader.load(getClass().getResource("../../fxml/Personne/MenuPersonne.fxml"));
 		    //creation d'une nouvelle scene basée sur le fxml 
 	        Scene scene = new Scene(parent);
 	        //Recuperation de la fenetre principale pour creer une nouvelle scene

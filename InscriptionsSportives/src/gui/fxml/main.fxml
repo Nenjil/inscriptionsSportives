@@ -16,8 +16,8 @@
             <Insets />
          </VBox.margin>
       </ImageView>
-		<Button mnemonicParsing="false" onAction="#getCompetMenu" prefHeight="30.0" prefWidth="150.0" text="Competitions" />
-		<Button mnemonicParsing="false" onAction="#getEquipeMenu" prefHeight="30.0" prefWidth="152.0" text="Equipe" />
-		<Button mnemonicParsing="false"  onAction="#getPersonneMenu" prefHeight="30.0" prefWidth="153.0" text="Personne" />
+		<Button mnemonicParsing="false" onAction="#getCompetMenu" prefHeight="30.0" prefWidth="150.0" text="Menu des competitions" />
+		<Button mnemonicParsing="false" onAction="#getEquipeMenu" prefHeight="30.0" prefWidth="152.0" text="Menu des equipes" />
+		<Button mnemonicParsing="false"  onAction="#getPersonneMenu" prefHeight="30.0" prefWidth="153.0" text="Menu des personnes" />
 	</children>
 </VBox>

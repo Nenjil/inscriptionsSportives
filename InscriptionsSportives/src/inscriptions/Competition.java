@@ -239,7 +239,7 @@ public class Competition implements Comparable<Competition>, Serializable
 	{
 		candidat.remove(this);
 		if(Inscriptions.HIBERNATE)
-			Passerelle.delete(this);
+			Passerelle.save(candidat);
 		return candidats.remove(candidat);
 	
 	}

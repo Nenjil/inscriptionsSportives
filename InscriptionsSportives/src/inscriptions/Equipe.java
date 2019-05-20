@@ -23,7 +23,7 @@ public class Equipe extends Candidat
 	private static final long serialVersionUID = 4147819927233466035L;
 	@Transient
 	private  Inscriptions inscriptions;
-	@ManyToMany(mappedBy="equipes", cascade = CascadeType.PERSIST)
+	@ManyToMany(fetch = FetchType.EAGER , mappedBy="equipes", cascade = CascadeType.PERSIST)
 	
 	@OrderBy("num_candidat asc")
 	private SortedSet<Personne> membres = new TreeSet<>();
@@ -69,7 +69,7 @@ public class Equipe extends Candidat
 	{
 		membre.add(this);
 		if(Inscriptions.HIBERNATE)
-			Passerelle.save(this);
+			Passerelle.save(membre);
 		return membres.add(membre);
 	}
 
@@ -83,7 +83,7 @@ public class Equipe extends Candidat
 	{
 		membre.remove(this);
 		if(Inscriptions.HIBERNATE)
-			Passerelle.delete(membre);
+			Passerelle.save(membre);
 		return membres.remove(membre);
 	}
 

@@ -24,7 +24,7 @@ public class Personne extends Candidat
 	 @Column (name="mail")
 	private String mail;
 	 
-	@ManyToMany( cascade = CascadeType.PERSIST)
+	@ManyToMany( fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinTable(name = "composer", joinColumns = @JoinColumn(name = "num_candidat_Personne"),
     inverseJoinColumns = @JoinColumn(name = "num_candidat_Equipe"))
 	private Set<Equipe> equipes;

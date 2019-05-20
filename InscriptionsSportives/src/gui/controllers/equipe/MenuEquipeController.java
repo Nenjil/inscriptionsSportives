@@ -2,14 +2,12 @@ package gui.controllers.equipe;
 
 import java.io.IOException;
 import java.net.URL;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
-import java.util.Locale;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import gui.controllers.MainController;
-import gui.controllers.competition.EditOrCreateCompetController;
-import inscriptions.Candidat;
 import inscriptions.Competition;
 import inscriptions.Equipe;
 import inscriptions.Personne;
@@ -99,9 +97,10 @@ public class MenuEquipeController implements Initializable {
 	Equipe equipeselected= equipesTable.getSelectionModel().getSelectedItem() ;
 		
 		if(equipeselected !=null) {
-			for (Personne membre : equipeselected.getMembres()) {
-				equipeselected.remove(membre);
-			}
+			
+			deleteMembers(equipeselected);
+			deleteCompets(equipeselected);
+			
 			equipeselected.delete();
 			equipesTable.getItems().remove(equipeselected);
 		}
@@ -112,6 +111,25 @@ public class MenuEquipeController implements Initializable {
 		//refresh la table
 		this.getGestionEquipes(e);
 		
+	}
+
+	private void deleteMembers(Equipe equipeselected) {
+		//Pour supprimer tous les membres d'une liste unmodifiable il faut passer par un iterateur et/ou cloner la liste
+		List<Personne> modifiable = new ArrayList<Personne>(equipeselected.getMembres());
+		for (Iterator<Personne> iterator = modifiable.iterator(); iterator.hasNext();) {
+		    Personne membre = iterator.next();
+		    equipeselected.remove(membre);
+		    iterator.remove();
+		}
+	}
+	
+	private void deleteCompets(Equipe equipeselected) {
+		List<Competition> modifiable = new ArrayList<Competition>(equipeselected.getCompetitions());
+		for (Iterator<Competition> iterator = modifiable.iterator(); iterator.hasNext();) {
+		    Competition compet = iterator.next();
+		    compet.remove(equipeselected);
+		    iterator.remove();
+		}
 	}
 	
 	public void handleEditEquipe (ActionEvent e) throws IOException {
@@ -148,18 +166,84 @@ public class MenuEquipeController implements Initializable {
 	}
 
 	public void handleAddMembreEquipe (ActionEvent e) throws IOException {
+		
+		Equipe equipeselected= equipesTable.getSelectionModel().getSelectedItem() ;
+		if(equipeselected !=null) {
+			// methode qui ouvre une fenetre avec la liste des candidats a ajouter
+			showMembresEquipeDialog(equipeselected,"AjoutMembres");
+		}
+		else {
+		       MainController.triggerNoSelectionAlert();
+			}
 			
 		}
 	
+	private void showMembresEquipeDialog(Equipe equipe,String mode) throws IOException {
+		FXMLLoader loader = new FXMLLoader();
+		loader.setLocation(getClass().getResource("../../fxml/equipe/"+mode+".fxml"));
+		BorderPane dialogPage = (BorderPane) loader.load();
+		//creation dune fenetre avec une scene 
+		Stage dialogStage = new Stage();
+		Scene scene = new Scene(dialogPage);
+		dialogStage.setScene(scene);
+		// initialisation de la compet en recuperant le controller
+
+		if(mode.equals("AjoutMembres")) {
+		AjoutMembresController controller = loader.getController();
+	    controller.setDialogStage(dialogStage);
+	    controller.setListMembres(equipe);
+		}
+		else {
+			DeleteMembresController controller = loader.getController();
+		    controller.setDialogStage(dialogStage);
+		    controller.setListMembres(equipe);
+		}
+	    
+	    
+        // affiche la boite de dialogue
+        dialogStage.showAndWait();
+
+	}
+
 	public void handleDeleteMembreEquipe (ActionEvent e) throws IOException {
+		
+		Equipe equipeselected= equipesTable.getSelectionModel().getSelectedItem() ;
+		if(equipeselected !=null) {
+			// methode qui ouvre une fenetre avec la liste des candidats a ajouter
+			showMembresEquipeDialog(equipeselected,"DeleteMembres");
+		}
+		else {
+		       MainController.triggerNoSelectionAlert();
+			}
 		
 	}
 	
 	public void handleVoirMembreEquipe (ActionEvent e) throws IOException {
 		
+		Equipe equipeselected= equipesTable.getSelectionModel().getSelectedItem() ;
+		if(equipeselected !=null) {
+			// methode qui ouvre une fenetre avec la liste des candidats a ajouter
+			showVoirMembreDialog(equipeselected);
+		}
+		else {
+		       MainController.triggerNoSelectionAlert();
+			}
 	}
 	
 	
+	private void showVoirMembreDialog(Equipe equipe) throws IOException {
+		  FXMLLoader loader = new FXMLLoader();
+	        loader.setLocation(getClass().getResource("../../fxml/equipe/VoirMembres.fxml"));
+	        BorderPane dialogPage = (BorderPane) loader.load();
+	        Stage dialogStage = new Stage();  
+	        Scene scene = new Scene(dialogPage);
+	        dialogStage.setScene(scene);
+	        VoirMembresController controller = loader.getController();
+	        controller.setDialogStage(dialogStage); 
+	        controller.setListMembres(equipe);
+	        dialogStage.showAndWait();
+	}
+
 	private void setPreviousLocation(String file) {
 
 		if(file.endsWith("VoirEquipes.fxml") || file.endsWith("GestionEquipes.fxml"))

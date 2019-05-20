@@ -27,7 +27,7 @@
             <Button fx:id="DeleteButton" mnemonicParsing="false" onAction="#handleDeleteEquipe"  prefHeight="26.0" prefWidth="150.0" text="Supprimer l'equipe" />
           <Button mnemonicParsing="false"  onAction="#handleEditEquipe" prefHeight="26.0" prefWidth="150.0" text="Modifier l'equipe" />
             <Button mnemonicParsing="false"  onAction="#handleAddMembreEquipe" prefHeight="26.0" prefWidth="150.0" text="Ajouter un membre" />
-            <Button mnemonicParsing="false" prefHeight="26.0" onAction="#handleDeleteMembreEquipe" prefWidth="150.0" text="supprimer un membre" />
+            <Button mnemonicParsing="false" prefHeight="26.0" onAction="#handleDeleteMembreEquipe" prefWidth="150.0" text="Supprimer un membre" />
             <Button mnemonicParsing="false" prefHeight="26.0" onAction ="#handleVoirMembreEquipe" prefWidth="150.0" text="Voir les membres">
                <VBox.margin>
                   <Insets bottom="15.0" />

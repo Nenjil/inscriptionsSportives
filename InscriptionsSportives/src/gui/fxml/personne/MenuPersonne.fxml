@@ -28,8 +28,8 @@
    <right>
       <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="140.0" prefWidth="600.0" spacing="10.0" BorderPane.alignment="CENTER">
          <children>
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Ajouter une personne" />
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Gerer les personnes" />
+            <Button alignment="CENTER" contentDisplay="CENTER" onAction ="#getAjoutPersonne"  mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Ajouter une personne" />
+            <Button alignment="CENTER" contentDisplay="CENTER" onAction= "#getGestionPersonnes" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Gerer les personnes" />
             <Button alignment="CENTER" contentDisplay="CENTER" onAction="#getVoirPersonnes" mnemonicParsing="false" prefHeight="30.0" prefWidth="150.0" text="Voir les personnes" />
          </children>
          <BorderPane.margin>
